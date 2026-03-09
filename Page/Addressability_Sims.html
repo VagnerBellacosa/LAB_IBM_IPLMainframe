@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Unit 5 - Addressability Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+input{
+padding:10px;
+margin:5px;
+width:150px;
+}
+
+button{
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:5px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+#console{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:280px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+margin-top:20px;
+}
+
+.table{
+margin-top:20px;
+border-collapse:collapse;
+width:100%;
+}
+
+.table th{
+background:#1e293b;
+padding:10px;
+}
+
+.table td{
+padding:8px;
+border-bottom:1px solid #334155;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mainframe Simulator</h1>
+
+<h2>Unit 5 - Addressability</h2>
+
+<p>Simulação de cálculo de endereços usando Base Register e Displacement.</p>
+
+<label>Base Register:</label>
+<input id="base" type="number" value="4096">
+
+<label>Displacement:</label>
+<input id="disp" type="number" value="120">
+
+<button onclick="calculate()">Calculate Address</button>
+
+<h3>Registers</h3>
+
+<table class="table">
+
+<thead>
+<tr>
+<th>Register</th>
+<th>Value</th>
+</tr>
+</thead>
+
+<tbody id="regTable">
+
+<tr><td>R15 (Base)</td><td id="baseVal">4096</td></tr>
+
+</tbody>
+
+</table>
+
+<h3>Console</h3>
+
+<div id="console"></div>
+
+<script>
+
+function log(text){
+
+let consoleDiv=document.getElementById("console")
+
+consoleDiv.innerHTML += text + "\n"
+
+consoleDiv.scrollTop = consoleDiv.scrollHeight
+
+}
+
+function calculate(){
+
+let base = parseInt(document.getElementById("base").value)
+
+let disp = parseInt(document.getElementById("disp").value)
+
+let address = base + disp
+
+document.getElementById("baseVal").innerText = base
+
+log("Base Register value: " + base)
+
+log("Displacement: " + disp)
+
+log("Calculating Effective Address...")
+
+log("Effective Address = Base + Displacement")
+
+log("Effective Address = " + base + " + " + disp)
+
+log("Effective Address = " + address)
+
+log("-----------------------------")
+
+}
+
+</script>
+
+</body>
+
+</html>
