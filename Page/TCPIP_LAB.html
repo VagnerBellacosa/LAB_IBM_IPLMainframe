@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>z/OS TCPIP Troubleshooting Lab</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+}
+
+#console{
+border:1px solid #00ff00;
+padding:15px;
+height:450px;
+overflow:auto;
+white-space:pre-wrap;
+}
+
+input{
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+width:100%;
+padding:10px;
+font-family:Courier New;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>z/OS TCP/IP Troubleshooting Lab</h2>
+
+<p>Digite comandos como:</p>
+
+<pre>
+D TCPIP
+NETSTAT DEV
+NETSTAT CONN
+PING 10.1.1.1
+START TCPIP
+</pre>
+
+<div id="console">
+TCPIP LAB READY
+PROBLEM: USERS CANNOT CONNECT TO TN3270
+</div>
+
+<input id="cmd" placeholder="Digite um comando">
+
+<script>
+
+let tcpipActive=false
+let osaActive=false
+
+function print(text){
+
+let c=document.getElementById("console")
+
+c.innerHTML+="\n"+text
+
+c.scrollTop=c.scrollHeight
+
+}
+
+document.getElementById("cmd").addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+let cmd=this.value.toUpperCase()
+
+print("> "+cmd)
+
+if(cmd==="D TCPIP"){
+
+if(tcpipActive)
+print("EZZ4210I TCPIP STATUS: ACTIVE")
+
+else
+print("EZZ4210I TCPIP STATUS: INACTIVE")
+
+}
+
+else if(cmd==="START TCPIP"){
+
+tcpipActive=true
+print("EZZ4300I TCPIP STACK STARTED")
+
+}
+
+else if(cmd==="NETSTAT DEV"){
+
+if(!tcpipActive){
+
+print("TCPIP NOT ACTIVE")
+
+}
+
+else{
+
+if(osaActive)
+print("OSA1 STATUS: ACTIVE IP 10.1.1.10")
+
+else
+print("OSA1 STATUS: INACTIVE")
+
+}
+
+}
+
+else if(cmd==="VARY OSA1,ONLINE"){
+
+osaActive=true
+print("OSA1 ACTIVATED")
+
+}
+
+else if(cmd.startsWith("PING")){
+
+if(!tcpipActive)
+print("TCPIP NOT ACTIVE")
+
+else if(!osaActive)
+print("NETWORK UNREACHABLE")
+
+else
+print("Reply from remote host")
+
+}
+
+else{
+
+print("UNKNOWN COMMAND")
+
+}
+
+this.value=""
+
+}
+
+})
+
+</script>
+
+</body>
+
+</html>

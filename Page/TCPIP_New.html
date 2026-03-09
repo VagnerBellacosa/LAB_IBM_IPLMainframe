@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>z/OS TCPIP Simulator</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+}
+
+input{
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+width:100%;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>z/OS TCP/IP Simulator</h2>
+
+<div id="console"></div>
+
+<input id="cmd" placeholder="Digite um comando">
+
+<script>
+
+document.getElementById("cmd").addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+let cmd=this.value
+
+let consoleDiv=document.getElementById("console")
+
+consoleDiv.innerHTML+="<br>> "+cmd
+
+if(cmd==="D TCPIP")
+consoleDiv.innerHTML+="<br>TCPIP STATUS: ACTIVE"
+
+else if(cmd==="NETSTAT")
+consoleDiv.innerHTML+="<br>ACTIVE CONNECTIONS: 4"
+
+else if(cmd.startsWith("PING"))
+consoleDiv.innerHTML+="<br>Reply received"
+
+else
+consoleDiv.innerHTML+="<br>UNKNOWN COMMAND"
+
+this.value=""
+
+}
+
+})
+
+</script>
+
+</body>
+</html>
