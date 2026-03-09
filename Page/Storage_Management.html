@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Unit 6 - Storage Management Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+button{
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:5px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+#console{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:300px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+margin-top:20px;
+}
+
+.memory{
+
+margin-top:20px;
+display:flex;
+flex-wrap:wrap;
+width:420px;
+
+}
+
+.block{
+
+width:40px;
+height:40px;
+margin:2px;
+background:#1e293b;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:10px;
+
+}
+
+.used{
+background:#22c55e;
+}
+
+.paged{
+background:#f59e0b;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mainframe Simulator</h1>
+
+<h2>Unit 6 - Storage Management</h2>
+
+<p>Simulação de gerenciamento de memória no sistema.</p>
+
+<button onclick="createAddressSpace()">Create Address Space</button>
+<button onclick="allocateMemory()">Allocate Memory</button>
+<button onclick="pageOut()">Page Out</button>
+<button onclick="freeMemory()">Free Memory</button>
+
+<div id="console"></div>
+
+<h3>Real Storage Frames</h3>
+
+<div id="memory" class="memory"></div>
+
+<script>
+
+let frames=[]
+let totalFrames=64
+
+for(let i=0;i<totalFrames;i++){
+
+frames.push("free")
+
+}
+
+function renderMemory(){
+
+let mem=document.getElementById("memory")
+
+mem.innerHTML=""
+
+frames.forEach((f,i)=>{
+
+let div=document.createElement("div")
+
+div.className="block"
+
+if(f==="used") div.classList.add("used")
+if(f==="paged") div.classList.add("paged")
+
+div.innerText=i
+
+mem.appendChild(div)
+
+})
+
+}
+
+function log(text){
+
+let console=document.getElementById("console")
+
+console.innerHTML+=text+"\n"
+
+console.scrollTop=console.scrollHeight
+
+}
+
+function createAddressSpace(){
+
+log("Creating Address Space")
+
+log("Initializing virtual storage structures")
+
+}
+
+function allocateMemory(){
+
+for(let i=0;i<frames.length;i++){
+
+if(frames[i]==="free"){
+
+frames[i]="used"
+
+log("Frame "+i+" allocated")
+
+renderMemory()
+
+return
+
+}
+
+}
+
+log("No free frames available")
+
+}
+
+function pageOut(){
+
+for(let i=0;i<frames.length;i++){
+
+if(frames[i]==="used"){
+
+frames[i]="paged"
+
+log("Frame "+i+" paged to auxiliary storage")
+
+renderMemory()
+
+return
+
+}
+
+}
+
+log("No frames to page")
+
+}
+
+function freeMemory(){
+
+for(let i=0;i<frames.length;i++){
+
+if(frames[i]==="paged"){
+
+frames[i]="free"
+
+log("Frame "+i+" released")
+
+renderMemory()
+
+return
+
+}
+
+}
+
+log("No frames to free")
+
+}
+
+renderMemory()
+
+</script>
+
+</body>
+
+</html>
+
