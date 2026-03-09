@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Unit 7 - Recovery Termination Manager Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+button{
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:6px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+#console{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:320px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+margin-top:20px;
+}
+
+.error{
+color:red;
+}
+
+.dump{
+color:orange;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mainframe Simulator</h1>
+<h2>Unit 7 - Recovery Termination Manager</h2>
+
+<p>Simulação de tratamento de erros e ABENDs pelo RTM.</p>
+
+<button onclick="runProgram()">Run Program</button>
+<button onclick="causeAbend()">Generate ABEND</button>
+<button onclick="recovery()">Execute Recovery Routine</button>
+<button onclick="dump()">Generate System Dump</button>
+<button onclick="terminate()">Terminate Task</button>
+
+<div id="console"></div>
+
+<script>
+
+let programRunning=false
+let abendCode=""
+
+function log(text,type){
+
+let consoleDiv=document.getElementById("console")
+
+if(type==="error")
+consoleDiv.innerHTML+="<span class='error'>"+text+"</span>\n"
+
+else if(type==="dump")
+consoleDiv.innerHTML+="<span class='dump'>"+text+"</span>\n"
+
+else
+consoleDiv.innerHTML+=text+"\n"
+
+consoleDiv.scrollTop=consoleDiv.scrollHeight
+
+}
+
+function runProgram(){
+
+programRunning=true
+
+log("Program started")
+log("Task running in problem state")
+
+}
+
+function causeAbend(){
+
+if(!programRunning){
+
+log("No program running")
+return
+
+}
+
+let abends=["S0C4","S0C7","S322","S806"]
+
+abendCode=abends[Math.floor(Math.random()*abends.length)]
+
+log("ABEND DETECTED: "+abendCode,"error")
+
+log("RTM invoked")
+
+}
+
+function recovery(){
+
+if(!abendCode){
+
+log("No error detected")
+return
+
+}
+
+log("Executing ESTAE recovery routine")
+
+log("Cleaning resources")
+
+}
+
+function dump(){
+
+if(!abendCode){
+
+log("No ABEND to dump")
+return
+
+}
+
+log("Generating system dump...","dump")
+
+log("Dump dataset SYS1.DUMP created","dump")
+
+}
+
+function terminate(){
+
+if(!abendCode){
+
+log("No task to terminate")
+return
+
+}
+
+log("RTM terminating task")
+
+log("Control returned to system")
+
+programRunning=false
+abendCode=""
+
+}
+
+</script>
+
+</body>
+
+</html>
