@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>IBM Mainframe IPL Simulator</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:"Courier New",monospace;
+padding:20px;
+}
+
+#console{
+white-space:pre;
+border:1px solid #0f0;
+padding:15px;
+height:500px;
+overflow:auto;
+}
+
+button{
+background:#111;
+color:#0f0;
+border:1px solid #0f0;
+padding:10px;
+margin:5px;
+font-family:monospace;
+}
+
+h2{
+color:#0f0;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>IBM Z IPL Training Simulator</h2>
+
+<button onclick="createLPAR()">Create LPAR</button>
+<button onclick="powerOn()">Power On CPC</button>
+<button onclick="ipl()">IPL System</button>
+<button onclick="startSubsystems()">Start Subsystems</button>
+
+<div id="console"></div>
+
+<script>
+
+function log(text){
+
+let consoleDiv=document.getElementById("console");
+consoleDiv.innerHTML+=text+"\n";
+consoleDiv.scrollTop=consoleDiv.scrollHeight;
+
+}
+
+function delay(ms){
+return new Promise(resolve=>setTimeout(resolve,ms));
+}
+
+async function createLPAR(){
+
+log("HMC: Creating Logical Partition LPAR1");
+await delay(1000)
+
+log("Assigning CPUs...");
+await delay(1000)
+
+log("Assigning 16GB Central Storage...");
+await delay(1000)
+
+log("Assigning Channels...");
+await delay(1000)
+
+log("LPAR LPAR1 successfully created");
+
+}
+
+async function powerOn(){
+
+log("Powering on CPC...");
+await delay(1500)
+
+log("Initializing hardware...");
+await delay(1500)
+
+log("Processor status: ACTIVE");
+await delay(1000)
+
+log("Channel subsystem initialized");
+
+}
+
+async function ipl(){
+
+log("HMC Command: IPL 0A82");
+
+await delay(1200)
+
+log("IEA000I IPL IN PROGRESS");
+
+await delay(1000)
+
+log("Loading Nucleus...");
+
+await delay(1200)
+
+log("IEA101A SPECIFY SYSTEM PARAMETERS");
+
+await delay(1500)
+
+log("IEA101A REPLY U");
+
+await delay(1000)
+
+log("Reading IEASYS00...");
+
+await delay(1000)
+
+log("Master Scheduler Initialization");
+
+await delay(1000)
+
+log("IEA371I MASTER SCHEDULER INITIALIZED");
+
+await delay(1200)
+
+log("Mounting SYSRES...");
+
+await delay(1000)
+
+log("Starting JES2...");
+
+await delay(1200)
+
+log("$HASP426 JES2 INITIALIZATION COMPLETE");
+
+await delay(1000)
+
+log("System Initialization Complete");
+
+}
+
+async function startSubsystems(){
+
+log("Starting TSO...");
+
+await delay(1000)
+
+log("IKT005I TSO INITIALIZATION COMPLETE");
+
+await delay(1200)
+
+log("Loading ISPF panels...");
+
+await delay(1000)
+
+log("ISPF READY");
+
+await delay(1200)
+
+log("Starting CICS region...");
+
+await delay(1200)
+
+log("DFHSI1517 CICS REGION STARTED");
+
+await delay(1200)
+
+log("Starting DB2 subsystem...");
+
+await delay(1200)
+
+log("DSN9022I DB2 STARTED");
+
+await delay(1200)
+
+log("Initializing SDSF...");
+
+await delay(1000)
+
+log("ISF031I SDSF INITIALIZED");
+
+await delay(1200)
+
+log("SYSTEM READY FOR USERS");
+
+}
+
+</script>
+
+</body>
+</html>

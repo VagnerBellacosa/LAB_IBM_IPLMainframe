@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mainframe IPL Simulator | Treinamento z/OS e Sysprog</title>
+
+<meta name="description" content="Simulador de IPL de Mainframe para treinamento. Demonstra o processo de boot de sistemas IBM Z, incluindo inicialização de LPAR, JES2, ISPF, CICS, DB2 e SDSF.">
+
+<meta name="keywords" content="mainframe IPL, z/OS IPL, mainframe simulator, sysprog training, IBM Z IPL process, Bellacosa Mainframe">
+
+<meta name="author" content="Bellacosa Mainframe">
+
+<meta name="robots" content="index, follow">
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#0f172a;
+color:#e2e8f0;
+line-height:1.6;
+}
+
+header{
+background:#020617;
+padding:30px;
+text-align:center;
+}
+
+h1{
+margin:0;
+color:#38bdf8;
+}
+
+h2{
+color:#7dd3fc;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px;
+}
+
+.card{
+
+background:#020617;
+padding:25px;
+border-radius:10px;
+margin-bottom:20px;
+
+}
+
+.button{
+
+display:inline-block;
+padding:15px 25px;
+margin:10px;
+background:#0ea5e9;
+color:white;
+text-decoration:none;
+border-radius:6px;
+font-weight:bold;
+
+}
+
+.button:hover{
+background:#0284c7;
+}
+
+footer{
+
+text-align:center;
+padding:20px;
+background:#020617;
+font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Mainframe IPL Simulator</h1>
+
+<p>Simulador educacional do processo de Initial Program Load (IPL) em sistemas IBM Z</p>
+
+</header>
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>Sobre o Simulador</h2>
+
+<p>
+Este projeto apresenta um simulador educacional do processo de <strong>IPL (Initial Program Load)</strong> utilizado em sistemas 
+<strong>IBM Z / Mainframe</strong>. 
+</p>
+
+<p>
+O objetivo é demonstrar de forma visual e interativa as etapas fundamentais de inicialização de um sistema operacional como o <strong>z/OS</strong>.
+</p>
+
+<p>
+Durante a execução do simulador é possível observar o fluxo típico de inicialização:
+</p>
+
+<ul>
+
+<li>Criação e ativação de uma LPAR</li>
+
+<li>Inicialização do hardware</li>
+
+<li>Carregamento do núcleo do sistema</li>
+
+<li>Inicialização do JES2</li>
+
+<li>Inicialização do TSO</li>
+
+<li>Inicialização do ISPF</li>
+
+<li>Inicialização de subsistemas como CICS e DB2</li>
+
+<li>Disponibilização do SDSF</li>
+
+</ul>
+
+<p>
+Esse processo representa, de forma simplificada, o ciclo de boot de um ambiente real de mainframe.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Acessar os Simuladores</h2>
+
+<p>Escolha abaixo a versão do simulador:</p>
+
+<a class="button" href="IPL.html">
+Simulador IPL Básico
+</a>
+
+<a class="button" href="IPL_FULL.html">
+Simulador IPL Completo
+</a>
+
+</div>
+
+
+<div class="card">
+
+<h2>Para quem este simulador foi criado</h2>
+
+<ul>
+
+<li>Estudantes de mainframe</li>
+
+<li>Operadores de sistemas IBM Z</li>
+
+<li>Administradores de sistemas (Sysprog)</li>
+
+<li>Instrutores de treinamento em z/OS</li>
+
+<li>Profissionais interessados na arquitetura de mainframes</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2>Limitações do Simulador</h2>
+
+<p>
+Este simulador foi desenvolvido exclusivamente para fins educacionais e não representa um ambiente real de produção.
+</p>
+
+<p>
+Algumas limitações incluem:
+</p>
+
+<ul>
+
+<li>Não executa um sistema operacional real como z/OS</li>
+
+<li>Não utiliza hardware IBM Z real</li>
+
+<li>As mensagens exibidas são simuladas</li>
+
+<li>Não há gerenciamento real de dispositivos ou canais</li>
+
+<li>Os subsistemas (JES2, CICS, DB2, SDSF) são representações conceituais</li>
+
+</ul>
+
+<p>
+Em um ambiente real de mainframe, o processo de IPL envolve componentes adicionais como:
+</p>
+
+<ul>
+
+<li>Hardware Management Console (HMC)</li>
+
+<li>Perfis de LPAR</li>
+
+<li>Volumes de sistema (SYSRES)</li>
+
+<li>Subsystems complexos</li>
+
+<li>Configuração de dispositivos e canais</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2>Projeto Educacional</h2>
+
+<p>
+Este simulador faz parte das iniciativas educacionais da comunidade 
+<strong>Bellacosa Mainframe</strong>, com foco na disseminação de conhecimento sobre sistemas IBM Z e tecnologias de missão crítica.
+</p>
+
+<p>
+O objetivo é tornar o aprendizado de arquitetura mainframe mais acessível, visual e interativo.
+</p>
+
+</div>
+
+
+</div>
+
+<footer>
+
+<p>© Bellacosa Mainframe</p>
+
+<p>Treinamento e educação em tecnologias IBM Z</p>
+
+</footer>
+
+</body>
+
+</html>
