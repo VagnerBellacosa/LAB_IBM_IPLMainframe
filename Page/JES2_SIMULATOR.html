@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>JES2 Simulator Lab</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+}
+
+#console{
+border:1px solid #00ff00;
+padding:15px;
+height:450px;
+overflow:auto;
+white-space:pre-wrap;
+}
+
+input{
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+width:100%;
+padding:10px;
+font-family:Courier New;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>JES2 Operator Simulator</h2>
+
+<p>Comandos disponíveis:</p>
+
+<pre>
+$D J
+$D Q
+$HASP
+$PJES2
+$SJES2
+$C JOB
+</pre>
+
+<div id="console">
+
+$HASP426 JES2 INITIALIZATION COMPLETE
+SYSTEM READY
+
+</div>
+
+<input id="cmd" placeholder="Digite um comando JES2">
+
+<script>
+
+let jobs=[
+{ id:"JOB001", status:"EXECUTION"},
+{ id:"JOB002", status:"WAITING"},
+{ id:"JOB003", status:"OUTPUT"}
+]
+
+function print(text){
+
+let c=document.getElementById("console")
+c.innerHTML+="\n"+text
+c.scrollTop=c.scrollHeight
+
+}
+
+document.getElementById("cmd").addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+let cmd=this.value.toUpperCase()
+
+print("> "+cmd)
+
+if(cmd==="$D J"){
+
+print("ACTIVE JOBS:")
+
+jobs.forEach(j=>{
+print(j.id+" "+j.status)
+})
+
+}
+
+else if(cmd==="$D Q"){
+
+print("JES2 QUEUES")
+print("INPUT QUEUE: 2 JOBS")
+print("EXECUTION: 1 JOB")
+print("OUTPUT QUEUE: 1 JOB")
+
+}
+
+else if(cmd.startsWith("$C")){
+
+let job=cmd.split(" ")[1]
+
+jobs=jobs.filter(j=>j.id!==job)
+
+print("$HASP395 "+job+" CANCELLED")
+
+}
+
+else if(cmd==="$PJES2"){
+
+print("$HASP099 JES2 STOPPING")
+
+}
+
+else if(cmd==="$SJES2"){
+
+print("$HASP426 JES2 INITIALIZATION COMPLETE")
+
+}
+
+else{
+
+print("INVALID JES2 COMMAND")
+
+}
+
+this.value=""
+
+}
+
+})
+
+</script>
+
+</body>
+
+</html>
