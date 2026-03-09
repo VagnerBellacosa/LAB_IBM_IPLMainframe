@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<title>IPL Troubleshooting Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+button{
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:6px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+#console{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:350px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+margin-top:20px;
+}
+
+.error{
+color:red;
+}
+
+.warning{
+color:orange;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mainframe IPL Troubleshooting Lab</h1>
+
+<p>Simulação de diagnóstico de problemas durante o IPL.</p>
+
+<button onclick="startIPL()">Start IPL</button>
+<button onclick="checkVolumes()">Check Volumes</button>
+<button onclick="fixSysres()">Mount SYSRES</button>
+<button onclick="checkJes()">Check JES2</button>
+<button onclick="continueIPL()">Continue IPL</button>
+
+<div id="console"></div>
+
+<script>
+
+let sysresMounted=false
+let jesReady=false
+
+function log(text,type){
+
+let c=document.getElementById("console")
+
+if(type==="error")
+c.innerHTML+="<span class='error'>"+text+"</span>\n"
+else if(type==="warning")
+c.innerHTML+="<span class='warning'>"+text+"</span>\n"
+else
+c.innerHTML+=text+"\n"
+
+c.scrollTop=c.scrollHeight
+
+}
+
+function startIPL(){
+
+log("Operator command: IPL 0A82")
+log("IEA000I IPL IN PROGRESS")
+
+log("Reading system volume...")
+
+log("IEC161I SYSRES VOLUME NOT FOUND","error")
+
+log("IPL halted")
+
+}
+
+function checkVolumes(){
+
+log("Checking DASD volumes...")
+
+log("Volume SYSRES status: OFFLINE","warning")
+
+}
+
+function fixSysres(){
+
+sysresMounted=true
+
+log("Mounting SYSRES volume...")
+
+log("Volume SYSRES online")
+
+}
+
+function checkJes(){
+
+if(!sysresMounted){
+
+log("SYSRES not mounted","error")
+return
+
+}
+
+log("Starting JES2...")
+
+log("$HASP426 JES2 INITIALIZATION STARTED")
+
+jesReady=true
+
+log("$HASP426 JES2 INITIALIZATION COMPLETE")
+
+}
+
+function continueIPL(){
+
+if(!sysresMounted){
+
+log("Cannot continue IPL: SYSRES missing","error")
+return
+
+}
+
+if(!jesReady){
+
+log("JES2 not initialized","warning")
+return
+
+}
+
+log("IEA371I MASTER SCHEDULER INITIALIZED")
+
+log("TSO initialization starting")
+
+log("IKT005I TSO INITIALIZATION COMPLETE")
+
+log("SYSTEM READY")
+
+}
+
+</script>
+
+</body>
+
+</html>
