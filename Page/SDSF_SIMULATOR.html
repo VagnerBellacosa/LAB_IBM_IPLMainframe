@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>SDSF Simulator</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+}
+
+#console{
+border:1px solid #00ff00;
+padding:15px;
+height:450px;
+overflow:auto;
+white-space:pre;
+}
+
+input{
+background:black;
+color:#00ff00;
+border:1px solid #00ff00;
+width:100%;
+padding:10px;
+font-family:Courier New;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>SDSF Simulator</h2>
+
+<p>Comandos:</p>
+
+<pre>
+ST
+DA
+H
+O
+CANCEL JOB
+</pre>
+
+<div id="console">
+
+SDSF READY
+ENTER PANEL COMMAND
+
+</div>
+
+<input id="cmd" placeholder="Digite comando SDSF">
+
+<script>
+
+let jobs=[
+{ id:"JOB001", owner:"IBMUSER", status:"EXECUTION"},
+{ id:"JOB002", owner:"SYSADM", status:"OUTPUT"},
+{ id:"JOB003", owner:"DEVUSER", status:"HELD"}
+]
+
+let addressSpaces=[
+"JES2",
+"TCPIP",
+"CICSREG",
+"DB2MSTR",
+"OMVS"
+]
+
+function print(text){
+
+let c=document.getElementById("console")
+c.innerHTML+="\n"+text
+c.scrollTop=c.scrollHeight
+
+}
+
+document.getElementById("cmd").addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+let cmd=this.value.toUpperCase()
+
+print("> "+cmd)
+
+if(cmd==="ST"){
+
+print("JOBNAME  OWNER    STATUS")
+
+jobs.forEach(j=>{
+print(j.id+"  "+j.owner+"  "+j.status)
+})
+
+}
+
+else if(cmd==="DA"){
+
+print("ACTIVE ADDRESS SPACES")
+
+addressSpaces.forEach(a=>{
+print(a)
+})
+
+}
+
+else if(cmd==="H"){
+
+print("HELD OUTPUT")
+
+jobs.filter(j=>j.status==="HELD").forEach(j=>{
+print(j.id)
+})
+
+}
+
+else if(cmd==="O"){
+
+print("OUTPUT QUEUE")
+
+jobs.filter(j=>j.status==="OUTPUT").forEach(j=>{
+print(j.id)
+})
+
+}
+
+else if(cmd.startsWith("CANCEL")){
+
+let job=cmd.split(" ")[1]
+
+jobs=jobs.filter(j=>j.id!==job)
+
+print(job+" CANCELLED")
+
+}
+
+else{
+
+print("UNKNOWN COMMAND")
+
+}
+
+this.value=""
+
+}
+
+})
+
+</script>
+
+</body>
+
+</html>
