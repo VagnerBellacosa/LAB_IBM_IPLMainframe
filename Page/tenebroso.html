@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Mainframe IPL Nightmare Simulator</title>
+
+<style>
+
+body{
+background:black;
+color:#00ff00;
+font-family:Courier New, monospace;
+padding:20px;
+}
+
+#console{
+white-space:pre;
+border:1px solid #0f0;
+padding:15px;
+height:520px;
+overflow:auto;
+background:black;
+}
+
+button{
+background:#111;
+color:#0f0;
+border:1px solid #0f0;
+padding:10px;
+margin:5px;
+font-family:monospace;
+}
+
+.error{
+color:red;
+font-weight:bold;
+}
+
+.warning{
+color:yellow;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>IBM Z IPL Simulator — Nightmare Mode</h2>
+
+<button onclick="runNightmare()">Start Disaster IPL</button>
+
+<div id="console"></div>
+
+<script>
+
+function log(text, type){
+
+let consoleDiv=document.getElementById("console")
+
+if(type=="error")
+consoleDiv.innerHTML+= "<span class='error'>" + text + "</span>\n"
+else if(type=="warning")
+consoleDiv.innerHTML+= "<span class='warning'>" + text + "</span>\n"
+else
+consoleDiv.innerHTML+= text + "\n"
+
+consoleDiv.scrollTop=consoleDiv.scrollHeight
+
+}
+
+function delay(ms){
+return new Promise(resolve=>setTimeout(resolve,ms))
+}
+
+async function runNightmare(){
+
+document.getElementById("console").innerHTML=""
+
+log("HMC: Creating LPAR SYS1")
+
+await delay(1000)
+
+log("Assigning processors...")
+
+await delay(1000)
+
+log("Assigning memory...")
+
+await delay(1000)
+
+log("WARNING: CPU 02 NOT AVAILABLE","warning")
+
+await delay(1200)
+
+log("LPAR SYS1 ACTIVATED")
+
+await delay(1200)
+
+log("Operator Command: IPL 0A82")
+
+await delay(1200)
+
+log("IEA000I IPL IN PROGRESS")
+
+await delay(1200)
+
+log("IEA101A SPECIFY SYSTEM PARAMETERS")
+
+await delay(1200)
+
+log("IEA995I SYSPARM ERROR DETECTED","error")
+
+await delay(1200)
+
+log("Retrying parameters...")
+
+await delay(1000)
+
+log("Reading IEASYS00...")
+
+await delay(1200)
+
+log("Mounting SYSRES...")
+
+await delay(1000)
+
+log("IEC161I DATA SET SYS1.LINKLIB NOT FOUND","error")
+
+await delay(1500)
+
+log("Attempting recovery...")
+
+await delay(1000)
+
+log("SYSRES MOUNTED")
+
+await delay(1200)
+
+log("IEA371I MASTER SCHEDULER INITIALIZED")
+
+await delay(1200)
+
+log("Starting JES2")
+
+await delay(1200)
+
+log("$HASP426 JES2 INITIALIZATION STARTED")
+
+await delay(1200)
+
+log("$HASP050 SPOOL SPACE CRITICAL","warning")
+
+await delay(1200)
+
+log("$HASP050 JES2 SPOOL FULL","error")
+
+await delay(1500)
+
+log("Operator deleting old spool datasets...")
+
+await delay(1200)
+
+log("$HASP426 JES2 INITIALIZATION COMPLETE")
+
+await delay(1200)
+
+log("Starting TSO")
+
+await delay(1200)
+
+log("IKT005I TSO INITIALIZATION COMPLETE")
+
+await delay(1200)
+
+log("Loading ISPF")
+
+await delay(1200)
+
+log("ISPF PANEL LOAD FAILED","error")
+
+await delay(1200)
+
+log("Retrying panel library")
+
+await delay(1200)
+
+log("ISPF READY")
+
+await delay(1200)
+
+log("Starting CICS REGION")
+
+await delay(1200)
+
+log("DFHSI1517 CICS REGION FAILED TO INITIALIZE","error")
+
+await delay(1500)
+
+log("Attempting restart...")
+
+await delay(1200)
+
+log("CICS REGION STARTED")
+
+await delay(1200)
+
+log("Starting DB2 SUBSYSTEM")
+
+await delay(1200)
+
+log("DSN9022I DB2 ABEND S04E","error")
+
+await delay(1500)
+
+log("Restarting DB2")
+
+await delay(1200)
+
+log("DSN9022I DB2 STARTED")
+
+await delay(1200)
+
+log("Initializing SDSF")
+
+await delay(1200)
+
+log("ISF031I SDSF FAILED AUTHORIZATION","error")
+
+await delay(1200)
+
+log("RACF profile updated")
+
+await delay(1200)
+
+log("ISF031I SDSF INITIALIZED")
+
+await delay(1200)
+
+log("SYSTEM READY — AFTER CHAOS")
+
+}
+
+</script>
+
+</body>
+</html>
