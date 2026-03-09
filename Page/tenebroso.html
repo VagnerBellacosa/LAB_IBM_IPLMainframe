@@ -42,13 +42,51 @@ font-weight:bold;
 color:yellow;
 }
 
+.top-bar{
+margin-bottom:20px;
+}
+
+.back-button{
+
+display:inline-block;
+padding:10px 18px;
+
+background:#000;
+color:#00ff00;
+
+border:2px solid #00ff00;
+
+text-decoration:none;
+font-family:Courier New, monospace;
+
+transition:0.2s;
+
+}
+
+.back-button:hover{
+
+background:#00ff00;
+color:#000;
+
+}
+
+
 </style>
 
 </head>
 
 <body>
 
-<h2>IBM Z IPL Simulator ó Nightmare Mode</h2>
+<button class="back-button" onclick="goBack()">‚Üê Voltar</button>
+<script>
+function goBack(){
+window.history.back()
+}
+</script>
+
+
+
+<h2>IBM Z IPL Simulator ‚Äî Nightmare Mode</h2>
 
 <button onclick="runNightmare()">Start Disaster IPL</button>
 
@@ -239,7 +277,7 @@ log("ISF031I SDSF INITIALIZED")
 
 await delay(1200)
 
-log("SYSTEM READY ó AFTER CHAOS")
+log("SYSTEM READY ‚Äî AFTER CHAOS")
 
 }
 

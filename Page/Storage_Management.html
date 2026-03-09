@@ -76,17 +76,55 @@ background:#22c55e;
 background:#f59e0b;
 }
 
+
+.top-bar{
+margin-bottom:20px;
+}
+
+.back-button{
+
+display:inline-block;
+padding:10px 18px;
+
+background:#000;
+color:#00ff00;
+
+border:2px solid #00ff00;
+
+text-decoration:none;
+font-family:Courier New, monospace;
+
+transition:0.2s;
+
+}
+
+.back-button:hover{
+
+background:#00ff00;
+color:#000;
+
+}
+
+
 </style>
 
 </head>
 
 <body>
 
+<button class="back-button" onclick="goBack()">‚Üê Voltar</button>
+<script>
+function goBack(){
+window.history.back()
+}
+</script>
+
+
 <h1>Mainframe Simulator</h1>
 
 <h2>Unit 6 - Storage Management</h2>
 
-<p>SimulaÁ„o de gerenciamento de memÛria no sistema.</p>
+<p>Simula√ß√£o de gerenciamento de mem√≥ria no sistema.</p>
 
 <button onclick="createAddressSpace()">Create Address Space</button>
 <button onclick="allocateMemory()">Allocate Memory</button>

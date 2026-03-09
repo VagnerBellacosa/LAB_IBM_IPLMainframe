@@ -57,18 +57,54 @@ margin-top:25px;
 
 }
 
+.top-bar{
+margin-bottom:20px;
+}
+
+.back-button{
+
+display:inline-block;
+padding:10px 18px;
+
+background:#000;
+color:#00ff00;
+
+border:2px solid #00ff00;
+
+text-decoration:none;
+font-family:Courier New, monospace;
+
+transition:0.2s;
+
+}
+
+.back-button:hover{
+
+background:#00ff00;
+color:#000;
+
+}
+
+
 </style>
 
 </head>
 
 <body>
 
+<button class="back-button" onclick="goBack()">‚Üê Voltar</button>
+<script>
+function goBack(){
+window.history.back()
+}
+</script>
+
 <h1>IBM Mainframe Simulator</h1>
 
 <h2>Unit 2 - Operating Environment Initialization</h2>
 
 <p>
-Este simulador demonstra as etapas de inicializaÁ„o de um ambiente operacional em um sistema mainframe.
+Este simulador demonstra as etapas de inicializa√ß√£o de um ambiente operacional em um sistema mainframe.
 </p>
 
 <div class="section">

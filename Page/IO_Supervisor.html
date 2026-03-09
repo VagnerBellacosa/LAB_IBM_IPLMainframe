@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Unit 4 - Input/Output Supervisor Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+button{
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:5px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+#console{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:320px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+}
+
+.deviceTable{
+margin-top:20px;
+border-collapse:collapse;
+width:100%;
+}
+
+.deviceTable th{
+background:#1e293b;
+padding:10px;
+}
+
+.deviceTable td{
+padding:8px;
+border-bottom:1px solid #334155;
+}
+
+.top-bar{
+margin-bottom:20px;
+}
+
+.back-button{
+
+display:inline-block;
+padding:10px 18px;
+
+background:#000;
+color:#00ff00;
+
+border:2px solid #00ff00;
+
+text-decoration:none;
+font-family:Courier New, monospace;
+
+transition:0.2s;
+
+}
+
+.back-button:hover{
+
+background:#00ff00;
+color:#000;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<button class="back-button" onclick="goBack()">← Voltar</button>
+<script>
+function goBack(){
+window.history.back()
+}
+</script>
+
+
+<h1>Mainframe Simulator</h1>
+<h2>Unit 4 - Input/Output Supervisor</h2>
+
+<p>Simulação do gerenciamento de operações de I/O pelo IOS.</p>
+
+<button onclick="requestIO()">Program Request I/O</button>
+<button onclick="buildChannel()">Build Channel Program</button>
+<button onclick="startIO()">Start I/O</button>
+<button onclick="interruptIO()">I/O Interrupt</button>
+
+<h3>System Console</h3>
+
+<div id="console"></div>
+
+<h3>Device Status</h3>
+
+<table class="deviceTable">
+
+<thead>
+<tr>
+<th>Device</th>
+<th>Status</th>
+<th>Last Operation</th>
+</tr>
+</thead>
+
+<tbody id="deviceTable"></tbody>
+
+</table>
+
+<script>
+
+let device={
+
+name:"3390-DASD",
+status:"IDLE",
+operation:"NONE"
+
+}
+
+function log(text){
+
+let consoleDiv=document.getElementById("console")
+
+consoleDiv.innerHTML+=text+"\n"
+
+consoleDiv.scrollTop=consoleDiv.scrollHeight
+
+}
+
+function updateDevice(){
+
+let table=document.getElementById("deviceTable")
+
+table.innerHTML=""
+
+table.innerHTML+="<tr><td>"+device.name+"</td><td>"+device.status+"</td><td>"+device.operation+"</td></tr>"
+
+}
+
+function requestIO(){
+
+device.status="REQUESTED"
+device.operation="READ DATASET"
+
+log("Program issued READ request")
+
+updateDevice()
+
+}
+
+function buildChannel(){
+
+device.status="CHANNEL PROGRAM BUILT"
+
+log("IOS building Channel Program")
+
+log("CCW chain created")
+
+updateDevice()
+
+}
+
+function startIO(){
+
+device.status="BUSY"
+
+log("Start I/O (SIO) instruction executed")
+
+log("Channel Subsystem controlling device")
+
+updateDevice()
+
+}
+
+function interruptIO(){
+
+device.status="IDLE"
+device.operation="READ COMPLETE"
+
+log("I/O Interrupt received")
+
+log("Data transferred to program buffer")
+
+updateDevice()
+
+}
+
+updateDevice()
+
+</script>
+
+</body>
+
+</html>
