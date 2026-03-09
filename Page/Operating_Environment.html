@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Unit 2 - Operating Environment Initialization Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial, Helvetica, sans-serif;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+#console{
+
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:350px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+
+}
+
+button{
+
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:5px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#0284c7;
+
+}
+
+.section{
+
+margin-top:25px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>IBM Mainframe Simulator</h1>
+
+<h2>Unit 2 - Operating Environment Initialization</h2>
+
+<p>
+Este simulador demonstra as etapas de inicialização de um ambiente operacional em um sistema mainframe.
+</p>
+
+<div class="section">
+
+<button onclick="powerOn()">Power On System</button>
+
+<button onclick="createLPAR()">Create LPAR</button>
+
+<button onclick="ipl()">IPL System</button>
+
+<button onclick="startSubsystems()">Start Subsystems</button>
+
+</div>
+
+<div class="section">
+
+<h3>System Console</h3>
+
+<div id="console"></div>
+
+</div>
+
+<script>
+
+function log(text){
+
+let consoleDiv=document.getElementById("console")
+
+consoleDiv.innerHTML += text + "\n"
+
+consoleDiv.scrollTop=consoleDiv.scrollHeight
+
+}
+
+function delay(ms){
+
+return new Promise(resolve => setTimeout(resolve, ms))
+
+}
+
+async function powerOn(){
+
+log("Powering on IBM Z system...")
+await delay(1000)
+
+log("Initializing processors...")
+await delay(1000)
+
+log("Initializing channel subsystem...")
+await delay(1000)
+
+log("Hardware initialization complete")
+
+}
+
+async function createLPAR(){
+
+log("Creating Logical Partition: LPAR1")
+await delay(1000)
+
+log("Assigning CPUs...")
+await delay(1000)
+
+log("Assigning central storage...")
+await delay(1000)
+
+log("Assigning I/O channels...")
+await delay(1000)
+
+log("LPAR1 successfully activated")
+
+}
+
+async function ipl(){
+
+log("Operator command: IPL 0A82")
+await delay(1000)
+
+log("IEA000I IPL IN PROGRESS")
+await delay(1000)
+
+log("Loading nucleus modules...")
+await delay(1000)
+
+log("IEA101A SPECIFY SYSTEM PARAMETERS")
+await delay(1000)
+
+log("Reading IEASYS00 from SYS1.PARMLIB")
+await delay(1000)
+
+log("Initializing control blocks...")
+await delay(1000)
+
+log("IEA371I MASTER SCHEDULER INITIALIZED")
+
+}
+
+async function startSubsystems(){
+
+log("Starting JES2 subsystem...")
+await delay(1000)
+
+log("$HASP426 JES2 INITIALIZATION COMPLETE")
+await delay(1000)
+
+log("Starting TSO environment...")
+await delay(1000)
+
+log("IKT005I TSO INITIALIZATION COMPLETE")
+await delay(1000)
+
+log("Loading ISPF services...")
+await delay(1000)
+
+log("ISPF READY")
+await delay(1000)
+
+log("SYSTEM READY FOR USERS")
+
+}
+
+</script>
+
+</body>
+
+</html>
