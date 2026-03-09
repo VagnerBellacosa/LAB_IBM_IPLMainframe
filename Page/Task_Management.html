@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Unit 3 - Task Management Simulator</title>
+
+<style>
+
+body{
+background:#020617;
+color:#e2e8f0;
+font-family:Arial;
+padding:30px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+#console{
+background:black;
+color:#00ff00;
+font-family:Courier New;
+padding:20px;
+height:320px;
+overflow:auto;
+border:1px solid #00ff00;
+white-space:pre;
+}
+
+button{
+background:#0ea5e9;
+border:none;
+padding:12px;
+margin:6px;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+.table{
+margin-top:20px;
+border-collapse:collapse;
+width:100%;
+}
+
+.table th{
+background:#1e293b;
+padding:10px;
+}
+
+.table td{
+padding:8px;
+border-bottom:1px solid #334155;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mainframe Simulator</h1>
+
+<h2>Unit 3 - Task Management</h2>
+
+<p>Simulação do gerenciamento de tarefas no sistema.</p>
+
+<button onclick="createJob()">Submit Job</button>
+<button onclick="createTask()">Create Task</button>
+<button onclick="dispatch()">Dispatch Task</button>
+<button onclick="contextSwitch()">Context Switch</button>
+
+<div style="margin-top:25px">
+
+<h3>System Console</h3>
+
+<div id="console"></div>
+
+</div>
+
+<h3>Active Tasks</h3>
+
+<table class="table">
+
+<thead>
+<tr>
+<th>Task ID</th>
+<th>Status</th>
+<th>Priority</th>
+</tr>
+</thead>
+
+<tbody id="taskTable"></tbody>
+
+</table>
+
+<script>
+
+let tasks=[]
+let taskId=1
+
+function log(text){
+
+let consoleDiv=document.getElementById("console")
+
+consoleDiv.innerHTML+=text+"\n"
+
+consoleDiv.scrollTop=consoleDiv.scrollHeight
+
+}
+
+function updateTable(){
+
+let table=document.getElementById("taskTable")
+
+table.innerHTML=""
+
+tasks.forEach(t=>{
+
+let row="<tr><td>"+t.id+"</td><td>"+t.status+"</td><td>"+t.priority+"</td></tr>"
+
+table.innerHTML+=row
+
+})
+
+}
+
+function createJob(){
+
+log("Submitting job to JES queue")
+
+}
+
+function createTask(){
+
+let task={
+
+id:taskId++,
+status:"READY",
+priority:Math.floor(Math.random()*10)
+
+}
+
+tasks.push(task)
+
+log("Task "+task.id+" created")
+
+updateTable()
+
+}
+
+function dispatch(){
+
+let ready=tasks.filter(t=>t.status==="READY")
+
+if(ready.length===0){
+
+log("No tasks ready")
+
+return
+
+}
+
+let task=ready.sort((a,b)=>b.priority-a.priority)[0]
+
+task.status="RUNNING"
+
+log("Dispatcher selected Task "+task.id)
+
+updateTable()
+
+}
+
+function contextSwitch(){
+
+let running=tasks.find(t=>t.status==="RUNNING")
+
+if(!running){
+
+log("No running task")
+
+return
+
+}
+
+running.status="READY"
+
+log("Context switch executed")
+
+updateTable()
+
+}
+
+</script>
+
+</body>
+
+</html>
