@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mainframe IPL Simulator | Treinamento z/OS e Sysprog</title>
+
+<meta name="description" content="Simulador de IPL de Mainframe para treinamento. Demonstra o processo de boot de sistemas IBM Z, incluindo inicialização de LPAR, JES2, ISPF, CICS, DB2 e SDSF.">
+
+<meta name="keywords" content="mainframe IPL, z/OS IPL, mainframe simulator, sysprog training, IBM Z IPL process, Bellacosa Mainframe">
+
+<meta name="author" content="Bellacosa Mainframe">
+
+<meta name="robots" content="index, follow">
+
+<meta name="msvalidate.01" content="CC3361AD860DBFE70D5DC045E61758B5" />
+
+<link rel="shortcut icon" type="imagex/png" href="Page/img/z17.ico">
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+margin:0;
+background:#0f172a;
+color:#e2e8f0;
+line-height:1.6;
+}
+
+header{
+background:#020617;
+padding:30px;
+text-align:center;
+}
+
+h1{
+margin:0;
+color:#38bdf8;
+}
+
+h2{
+color:#7dd3fc;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:30px;
+}
+
+.card{
+
+background:#020617;
+padding:25px;
+border-radius:10px;
+margin-bottom:20px;
+
+}
+
+.button{
+
+display:inline-block;
+padding:15px 25px;
+margin:10px;
+background:#0ea5e9;
+color:white;
+text-decoration:none;
+border-radius:6px;
+font-weight:bold;
+
+}
+
+.button:hover{
+background:#0284c7;
+}
+
+footer{
+
+text-align:center;
+padding:20px;
+background:#020617;
+font-size:14px;
+
+}
+
+.bellacosa-footer{
+
+background:#020617;
+padding:40px;
+margin-top:60px;
+color:#e2e8f0;
+
+}
+
+.bellacosa-footer h2{
+
+color:#38bdf8;
+margin-bottom:30px;
+
+}
+
+.footer-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+
+}
+
+.footer-card{
+
+background:#020617;
+border:1px solid #1e293b;
+padding:20px;
+border-radius:10px;
+
+}
+
+.footer-card h3{
+
+color:#7dd3fc;
+margin-bottom:10px;
+
+}
+
+.follow-btn{
+
+display:inline-block;
+margin-top:15px;
+padding:10px 18px;
+background:#0ea5e9;
+color:white;
+text-decoration:none;
+border-radius:6px;
+font-weight:bold;
+
+}
+
+.follow-btn:hover{
+
+background:#0284c7;
+
+}
+
+.blog iframe{
+
+border-radius:6px;
+
+}
+
+.copyright{
+
+margin-top:40px;
+text-align:center;
+font-size:14px;
+color:#94a3b8;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Mainframe IPL Simulator</h1>
+
+<p>Simulador educacional do processo de Initial Program Load (IPL) em sistemas IBM Z</p>
+
+</header>
+
+<div style="text-align:center; margin:20px 0;">
+
+<img 
+src="Page/img/IPL_Simulator.png"
+alt="IBM Z17 Mainframe IPL Simulator - Boot do z/OS"
+style="width:100%; max-width:1200px; border-radius:8px; box-shadow:0px 4px 10px rgba(0,0,0,0.3);">
+
+</div>
+
+
+
+<div class="container">
+
+<div class="card">
+
+<h2>Sobre o Simulador</h2>
+
+<p>
+Este projeto apresenta um simulador educacional do processo de <strong>IPL (Initial Program Load)</strong> utilizado em sistemas 
+<strong>IBM Z / Mainframe</strong>. 
+</p>
+
+<p>
+O objetivo é demonstrar de forma visual e interativa as etapas fundamentais de inicialização de um sistema operacional como o <strong>z/OS</strong>.
+</p>
+
+<p>
+Durante a execução do simulador é possível observar o fluxo típico de inicialização:
+</p>
+
+<ul>
+
+<li>Criação e ativação de uma LPAR</li>
+
+<li>Inicialização do hardware</li>
+
+<li>Carregamento do núcleo do sistema</li>
+
+<li>Inicialização do JES2</li>
+
+<li>Inicialização do TSO</li>
+
+<li>Inicialização do ISPF</li>
+
+<li>Inicialização de subsistemas como CICS e DB2</li>
+
+<li>Disponibilização do SDSF</li>
+
+</ul>
+
+<p>
+Esse processo representa, de forma simplificada, o ciclo de boot de um ambiente real de mainframe.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Acessar os Simuladores</h2>
+
+<p>Escolha abaixo a versão do simulador:</p>
+
+<a class="button" href="Page\IPL.html">
+Simulador IPL Básico
+</a>
+
+<a class="button" href="Page\IPL_FULL.html">
+Simulador IPL Completo
+</a>
+
+<a class="button" href="Page\tenebroso.html">
+Um dia Tenebroso
+</a>
+
+
+<a class="button" href="Page\TCPIP_LAB.html">
+Simulador TCP/IP
+</a>
+
+<a class="button" href="Page\TCPIP_New.html">
+Simulador TCP/IP Simples
+</a>
+
+<a class="button" href="Page\JES2_SIMULATOR.html">
+JES2 Simulator
+</a>
+
+<a class="button" href="Page\SDSF_SIMULATOR.html">
+SDSF Simulator
+</a>
+
+<a class="button" href="Page\Operating_Environment.html">
+Operating Environment
+</a>
+
+<a class="button" href="Page\IO_Supervisor.html">
+Input/Outpuy Supervisor
+</a>
+
+<a class="button" href="Page\Addressability_Sims.html">
+Addressability
+</a>
+
+<a class="button" href="Page\Task_Management.html">
+Task Management
+</a>
+
+<a class="button" href="Page\Storage_Management.html">
+Storage Management
+</a>
+
+<a class="button" href="Page\rtm_sims.html">
+Recovery Termination Manager
+</a>
+
+<a class="button" href="Page\ipl_troubleshooting_sims.html">
+IPL Troubleshooting Versão Bellacosa Mainframe
+</a>
+
+
+</div>
+
+
+<div class="card">
+
+<h2>Para quem este simulador foi criado</h2>
+
+<ul>
+
+<li>Estudantes de mainframe</li>
+
+<li>Operadores de sistemas IBM Z</li>
+
+<li>Administradores de sistemas (Sysprog)</li>
+
+<li>Instrutores de treinamento em z/OS</li>
+
+<li>Profissionais interessados na arquitetura de mainframes</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2>Limitações do Simulador</h2>
+
+<p>
+Este simulador foi desenvolvido exclusivamente para fins educacionais e não representa um ambiente real de produção.
+</p>
+
+<p>
+Algumas limitações incluem:
+</p>
+
+<ul>
+
+<li>Não executa um sistema operacional real como z/OS</li>
+
+<li>Não utiliza hardware IBM Z real</li>
+
+<li>As mensagens exibidas são simuladas</li>
+
+<li>Não há gerenciamento real de dispositivos ou canais</li>
+
+<li>Os subsistemas (JES2, CICS, DB2, SDSF) são representações conceituais</li>
+
+</ul>
+
+<p>
+Em um ambiente real de mainframe, o processo de IPL envolve componentes adicionais como:
+</p>
+
+<ul>
+
+<li>Hardware Management Console (HMC)</li>
+
+<li>Perfis de LPAR</li>
+
+<li>Volumes de sistema (SYSRES)</li>
+
+<li>Subsystems complexos</li>
+
+<li>Configuração de dispositivos e canais</li>
+
+</ul>
+
+</div>
+
+
+<div class="card">
+
+<h2>Projeto Educacional</h2>
+
+<p>
+Este simulador faz parte das iniciativas educacionais da comunidade 
+<strong>Bellacosa Mainframe</strong>, com foco na disseminação de conhecimento sobre sistemas IBM Z e tecnologias de missão crítica.
+</p>
+
+<p>
+O objetivo é tornar o aprendizado de arquitetura mainframe mais acessível, visual e interativo.
+</p>
+
+</div>
+
+
+</div>
+
+<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div style="text-align:center; margin-top:20px;">
+👨‍💻 Visitantes: 
+<span id="busuanzi_value_site_uv"></span>
+|
+📄 Visualizações:
+<span id="busuanzi_value_page_pv"></span>
+</div>
+
+<img src="https://visitor-badge.laobi.icu/badge?page_id=vagnerbellacosa.LAB_IBM_IPLMainframe">
+
+<br>
+<br>
+
+<h2>Blog - El Jefe Midnight Lunch</h2>
+
+<table>
+
+<tr>
+<th>Artigo</th>
+<th>Preview</th>
+<th>Ação</th>
+</tr>
+
+<tr>
+<td>O método de 60 segundos para descobrir...</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/03/o-metodo-de-60-segundos-para-descobrir.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/03/o-metodo-de-60-segundos-para-descobrir.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>Você usa React todos os dias...</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/03/voce-usa-react-todos-os-dias-e-talvez.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/03/voce-usa-react-todos-os-dias-e-talvez.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>O computador que nunca dorme</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/03/o-computador-que-nunca-dorme-jovem.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/03/o-computador-que-nunca-dorme-jovem.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>Mainframe não é legado</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/02/mainframe-nao-e-legado-e-estrategia.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/02/mainframe-nao-e-legado-e-estrategia.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>Mainframe meu caro</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/02/mainframe-meu-caro-ou-o-clube-do-blazer.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/02/mainframe-meu-caro-ou-o-clube-do-blazer.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>O dia em que decretaram a morte...</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/02/o-dia-em-que-decretaram-morte-do.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/02/o-dia-em-que-decretaram-morte-do.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>ABEND em mainframe não é azar</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/repost-abend-em-mainframe-nao-e-azar.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/01/repost-abend-em-mainframe-nao-e-azar.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>Por que um dev moderno deveria...</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/por-que-diabos-um-dev-moderno-deveria.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2026/01/por-que-diabos-um-dev-moderno-deveria.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>Debugando COBOL no mainframe</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/debugando-cobol-no-mainframe-o-caminho.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2025/12/debugando-cobol-no-mainframe-o-caminho.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>CI/CD no mainframe</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/cicd-no-mainframe-o-que-funciona-o-que.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2025/12/cicd-no-mainframe-o-que-funciona-o-que.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>Apostila DevOps Mainframe Jenkins</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/apostila-devops-mainframe-jenkins.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2025/12/apostila-devops-mainframe-jenkins.html">Ler Artigo</a></td>
+</tr>
+
+<tr>
+<td>ENIAC - O avô brutal dos mainframes</td>
+<td><iframe src="https://eljefemidnightlunch.blogspot.com/2025/08/eniac-o-avo-brutal-dos-mainframes.html"></iframe></td>
+<td><a class="follow-btn" target="_blank" href="https://eljefemidnightlunch.blogspot.com/2025/08/eniac-o-avo-brutal-dos-mainframes.html">Ler Artigo</a></td>
+</tr>
+
+</table>
+
+<br>
+<br>
+<br>
+
+<footer class="bellacosa-footer">
+
+<h2>Bellacosa Mainframe Network</h2>
+
+<div class="footer-grid">
+
+<!-- COMPANY -->
+
+<div class="footer-card">
+
+<h3>Bellacosa Mainframe</h3>
+
+<iframe src="https://www.linkedin.com/feed/update/urn:li:activity:7436637876433539072" height="578" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+
+<a href="https://www.linkedin.com/company/bellacosa-mainframe"
+target="_blank"
+class="follow-btn">Seguir</a>
+
+</div>
+
+
+<!-- NEWSLETTER -->
+
+<div class="footer-card">
+
+<h3>Newsletter</h3>
+
+<p>Um Café no Bellacosa Mainframe</p>
+
+<a href="https://www.linkedin.com/newsletters/um-caf%C3%A9-no-bellacosa-mainframe-7347385458416390144/"
+target="_blank"
+class="follow-btn">
+Acessar Newsletter
+</a>
+
+</div>
+
+
+<!-- COBOL LIFE -->
+
+<div class="footer-card">
+
+<h3>COBOL Life</h3>
+
+<p>Conteúdos dedicados ao universo COBOL e mainframe.</p>
+
+<a href="https://www.linkedin.com/showcase/cobol-life/"
+target="_blank"
+class="follow-btn">
+Seguir COBOL Life
+</a>
+
+</div>
+
+
+<!-- APRENDA -->
+
+<div class="footer-card">
+
+<h3>Aprenda no Bellacosa</h3>
+
+<p>Conteúdo educacional e laboratórios de mainframe.</p>
+
+<a href="https://www.linkedin.com/newsletters/aprenda-no-bellacosa-mainframe-7359389056255901697/"
+target="_blank"
+class="follow-btn">
+Acessar Newsletter
+</a>
+
+</div>
+
+
+<!-- BLOG -->
+
+<div class="footer-card blog">
+
+<h3>Último Post do Blog</h3>
+
+<iframe
+src="https://eljefemidnightlunch.blogspot.com"
+width="100%"
+height="260"
+frameborder="0">
+</iframe>
+
+<a href="https://eljefemidnightlunch.blogspot.com"
+target="_blank"
+class="follow-btn">
+Visitar Blog
+</a>
+
+</div>
+
+</div>
+
+<p class="copyright">
+© Bellacosa Mainframe
+</p>
+
+<p>Treinamento e educação em tecnologias IBM Z</p>
+
+</footer>
+
+</body>
+
+</html>
