@@ -1,0 +1,558 @@
+﻿```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>VSAM no Mainframe z/OS — Guia Completo para Programadores e Sysprogs</title>
+
+<meta name="description" content="Aprenda VSAM no IBM Mainframe z/OS: KSDS, ESDS, RRDS, IDCAMS, tuning, performance, CI/CA, COBOL e administração VSAM na prática." />
+
+<meta name="keywords" content="VSAM, Mainframe, zOS, COBOL, IDCAMS, KSDS, ESDS, RRDS, Sysprog, IBM Mainframe, CI, CA, tuning VSAM, performance VSAM" />
+
+<meta name="author" content="Vagner Bellacosa" />
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0d1117;
+    color:#f1f1f1;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.6;
+}
+
+header{
+    background:linear-gradient(135deg,#001f3f,#004080,#001f3f);
+    padding:50px 20px;
+    text-align:center;
+    border-bottom:4px solid #00d8ff;
+}
+
+header h1{
+    font-size:3rem;
+    margin-bottom:20px;
+    color:#00e0ff;
+}
+
+header p{
+    max-width:900px;
+    margin:auto;
+    font-size:1.2rem;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:40px 0;
+}
+
+.card{
+    background:#161b22;
+    padding:30px;
+    border-radius:14px;
+    margin-bottom:30px;
+    border:1px solid #30363d;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#00d8ff;
+    box-shadow:0 0 20px rgba(0,216,255,0.2);
+}
+
+.card h2{
+    color:#00d8ff;
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
+
+.feature{
+    background:#0f1720;
+    padding:20px;
+    border-radius:12px;
+    border-left:5px solid #00d8ff;
+}
+
+.feature h3{
+    color:#00d8ff;
+    margin-bottom:10px;
+}
+
+.code{
+    background:#000;
+    color:#00ff90;
+    padding:20px;
+    border-radius:10px;
+    overflow:auto;
+    margin-top:20px;
+    font-family:Consolas, monospace;
+}
+
+.highlight{
+    color:#00d8ff;
+    font-weight:bold;
+}
+
+footer{
+    background:#02060c;
+    padding:40px 20px;
+    margin-top:50px;
+    border-top:4px solid #00d8ff;
+}
+
+footer h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#00d8ff;
+    font-size:2rem;
+}
+
+.table-container{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th, td{
+    border:1px solid #30363d;
+    padding:15px;
+    vertical-align:top;
+}
+
+th{
+    background:#001f3f;
+    color:#00d8ff;
+}
+
+td{
+    background:#111827;
+}
+
+iframe{
+    width:100%;
+    height:260px;
+    border:none;
+    border-radius:10px;
+    background:#fff;
+}
+
+a{
+    color:#00d8ff;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+.title-link{
+    display:block;
+    margin-bottom:12px;
+    font-size:1rem;
+}
+
+.hero-badge{
+    display:inline-block;
+    margin-top:20px;
+    padding:10px 20px;
+    border-radius:50px;
+    background:#00d8ff;
+    color:#000;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+    header h1{
+        font-size:2rem;
+    }
+
+    iframe{
+        height:220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>💾 VSAM no IBM Mainframe z/OS</h1>
+
+    <p>
+        O VSAM é um dos pilares mais importantes do ecossistema IBM Mainframe.
+        Muito além de um simples arquivo, ele é um verdadeiro motor de alta performance
+        utilizado em bancos, seguradoras, governo e sistemas críticos do mundo inteiro.
+    </p>
+
+    <div class="hero-badge">
+        KSDS • ESDS • RRDS • IDCAMS • Tuning • COBOL • Performance
+    </div>
+</header>
+
+<div class="container">
+
+    <section class="card">
+        <h2>🔥 O que é VSAM?</h2>
+
+        <p>
+            O <span class="highlight">VSAM (Virtual Storage Access Method)</span>
+            é um método de acesso criado pela IBM para fornecer armazenamento,
+            indexação e acesso de alta velocidade aos datasets no z/OS.
+        </p>
+
+        <div class="grid" style="margin-top:25px;">
+
+            <div class="feature">
+                <h3>💾 KSDS</h3>
+                <p>
+                    Dataset indexado extremamente utilizado por aplicações COBOL
+                    corporativas.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>⚡ ESDS</h3>
+                <p>
+                    Estrutura sequencial de alta velocidade ideal para logs e trilhas.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>🔧 RRDS</h3>
+                <p>
+                    Acesso direto via número relativo de registro.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>🚀 LDS</h3>
+                <p>
+                    Base para subsistemas como Db2 e aplicações avançadas.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>💥 Por que VSAM ainda domina o mundo Mainframe?</h2>
+
+        <p>
+            Mesmo após décadas, o VSAM continua sendo uma das estruturas mais rápidas,
+            estáveis e eficientes do mercado corporativo.
+        </p>
+
+        <div class="code">
+DEFINE CLUSTER(NAME(MASTER.CLIENTE.KSDS) -<br>
+INDEXED -<br>
+KEYS(10 0) -<br>
+RECORDSIZE(100 300) -<br>
+CISZ(4096) -<br>
+FREESPACE(10 10) -<br>
+VOLUMES(PRD001))
+        </div>
+
+        <p style="margin-top:20px;">
+            O segredo real não está apenas no DEFINE...
+            mas em parâmetros como:
+            <span class="highlight">CI Size</span>,
+            <span class="highlight">Free Space</span>,
+            <span class="highlight">CA Split</span>,
+            tuning de buffer,
+            estratégia de chave e distribuição física.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>⚙️ Administração VSAM na Vida Real</h2>
+
+        <div class="grid">
+
+            <div class="feature">
+                <h3>📊 Performance</h3>
+                <p>
+                    Ajuste de buffers, CI/CA e estratégias de acesso para reduzir I/O.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>🔥 Tuning</h3>
+                <p>
+                    Evitar splits excessivos e gargalos de produção.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>💣 Recuperação</h3>
+                <p>
+                    REPRO, EXPORT, IMPORT e recuperação de datasets corrompidos.
+                </p>
+            </div>
+
+            <div class="feature">
+                <h3>☕ Integração COBOL</h3>
+                <p>
+                    FILE STATUS, READ, START, DELETE e acesso indexado.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<footer>
+
+    <h2>📚 Biblioteca VSAM Bellacosa Mainframe</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Preview</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2013/05/vsam-para-programadores-junior-o-guia.html" target="_blank">
+<b>💾 VSAM para Programadores Júnior — O Guia Essencial</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2013/05/vsam-para-programadores-junior-o-guia.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2013/10/ci-e-ca-no-vsam-base-fisica-que-voce.html" target="_blank">
+<b>💾 CI e CA no VSAM — A base física que você precisa dominar</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2013/10/ci-e-ca-no-vsam-base-fisica-que-voce.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2019/07/vsam-na-veia-o-guia-real-do-sysprog.html" target="_blank">
+<b>🔥 VSAM NA VEIA: O Guia REAL do Sysprog Júnior IBM Mainframe na Administração VSAM</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2019/07/vsam-na-veia-o-guia-real-do-sysprog.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2020/03/vsam-na-vida-real-o-segredo-nao-esta-no.html" target="_blank">
+<b>🔥 VSAM NA VIDA REAL: O segredo NÃO está no DEFINE…</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2020/03/vsam-na-vida-real-o-segredo-nao-esta-no.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2024/08/vsam-sem-misterio-do-zero-ao-jedi-dos.html" target="_blank">
+<b>☕💥 VSAM sem Mistério: Do Zero ao Jedi dos Datasets</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2024/08/vsam-sem-misterio-do-zero-ao-jedi-dos.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2024/11/seu-dado-nao-esta-seguro-ate-passar.html" target="_blank">
+<b>💣🔥 SEU DADO NÃO ESTÁ SEGURO… ATÉ PASSAR PELO VSAM + COBOL</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2024/11/seu-dado-nao-esta-seguro-ate-passar.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/01/seu-vsam-esta-te-segurando-ou-te.html" target="_blank">
+<b>🔥 SEU VSAM ESTÁ TE SEGURANDO… OU TE LIMITANDO?</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/seu-vsam-esta-te-segurando-ou-te.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/01/vsam-nao-e-arquivo-e-um-motor-oculto-do.html" target="_blank">
+<b>🔥 VSAM NÃO É ARQUIVO… É UM MOTOR OCULTO DO MAINFRAME</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/vsam-nao-e-arquivo-e-um-motor-oculto-do.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/01/file-status-00-e-mesmo-assim-deu-ruim-o.html" target="_blank">
+<b>💥 FILE STATUS 00… E MESMO ASSIM DEU RUIM?</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/file-status-00-e-mesmo-assim-deu-ruim-o.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/01/idcams-nao-e-so-delete-e-define-e-o.html" target="_blank">
+<b>💣 IDCAMS NÃO É SÓ DELETE E DEFINE</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/idcams-nao-e-so-delete-e-define-e-o.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/01/vsam-o-banco-de-dados-gratuito-do-zos.html" target="_blank">
+<b>💥 VSAM: O “Banco de Dados Gratuito” do z/OS</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/vsam-o-banco-de-dados-gratuito-do-zos.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/04/vsam-nao-morreu-ele-so-esta-rodando-em.html" target="_blank">
+<b>🔥 VSAM NÃO MORREU — ELE SÓ ESTÁ RODANDO EM PRODUÇÃO</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/vsam-nao-morreu-ele-so-esta-rodando-em.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/04/vsam-lento-nao-e-o-mainframe-e-o-seu.html" target="_blank">
+<b>💣 VSAM LENTO? NÃO É O MAINFRAME — É O SEU TUNING!</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/vsam-lento-nao-e-o-mainframe-e-o-seu.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/04/laboratorio-pratico-tuning-de-vsam-no.html" target="_blank">
+<b>🔧 Laboratório Prático – Tuning de VSAM no z/OS</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/laboratorio-pratico-tuning-de-vsam-no.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/04/vsam-seu-cobol-nao-guarda-dados-ele.html" target="_blank">
+<b>💥 VSAM -> SEU COBOL NÃO GUARDA DADOS</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/vsam-seu-cobol-nao-guarda-dados-ele.html"></iframe>
+</td>
+</tr>
+
+<tr>
+<td>
+<a class="title-link" href="https://eljefemidnightlunch.blogspot.com/2026/04/o-erro-silencioso-em-vsam-como-escolher.html" target="_blank">
+<b>⚠️ O Erro Silencioso em VSAM</b>
+</a>
+</td>
+<td>
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/o-erro-silencioso-em-vsam-como-escolher.html"></iframe>
+</td>
+</tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</footer>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("VSAM Mainframe Portal carregado.");
+
+    const cards = document.querySelectorAll('.card');
+
+    window.addEventListener('scroll', () => {
+
+        cards.forEach(card => {
+
+            const pos = card.getBoundingClientRect().top;
+
+            if(pos < window.innerHeight - 100){
+                card.style.opacity = 1;
+                card.style.transform = "translateY(0)";
+            }
+
+        });
+
+    });
+
+    cards.forEach(card => {
+        card.style.opacity = 0;
+        card.style.transform = "translateY(40px)";
+        card.style.transition = "all 0.8s ease";
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+```
+
