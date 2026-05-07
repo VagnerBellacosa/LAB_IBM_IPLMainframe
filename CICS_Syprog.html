@@ -1,0 +1,684 @@
+﻿
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔥 CICS Mainframe na Visão do Analista de Produção — Rotinas Diárias, Semanais e Mensais</title>
+
+<meta name="description" content="Descubra como funciona a administração do CICS Mainframe na visão de um Analista de Produção: monitoramento, tuning, incidentes, performance, segurança e sobrevivência em produção.">
+
+<meta name="keywords" content="CICS, Mainframe, IBM Z, zOS, Analista de Produção, CEMT, CICS TS, COBOL, monitoramento CICS, performance CICS, administração CICS">
+
+<meta name="author" content="Bellacosa Mainframe">
+
+<meta property="og:title" content="🔥 CICS Mainframe na Visão do Analista de Produção">
+<meta property="og:description" content="As rotinas diárias, semanais e mensais de quem mantém o coração transacional do mundo funcionando.">
+<meta property="og:type" content="website">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050505;
+    color:#e5e5e5;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.7;
+}
+
+header{
+    background:linear-gradient(135deg,#111,#1a1a1a,#202020);
+    padding:50px 20px;
+    text-align:center;
+    border-bottom:4px solid #ff6600;
+}
+
+header h1{
+    font-size:3rem;
+    color:#ff6600;
+    margin-bottom:20px;
+    text-shadow:0 0 15px #ff6600;
+}
+
+header p{
+    max-width:1000px;
+    margin:auto;
+    font-size:1.2rem;
+}
+
+.container{
+    width:95%;
+    max-width:1300px;
+    margin:auto;
+    padding:40px 0;
+}
+
+.card{
+    background:#121212;
+    border-left:5px solid #ff6600;
+    padding:30px;
+    margin-bottom:35px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(255,102,0,0.2);
+}
+
+.card h2{
+    color:#ff6600;
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.card ul{
+    margin-left:25px;
+}
+
+.card li{
+    margin-bottom:12px;
+}
+
+.highlight{
+    color:#00ff99;
+    font-weight:bold;
+}
+
+.counter-box{
+    background:#1a1a1a;
+    padding:20px;
+    margin-top:30px;
+    border-radius:10px;
+    text-align:center;
+    font-size:1.5rem;
+    border:2px solid #ff6600;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:40px;
+}
+
+table td{
+    border:1px solid #333;
+    padding:20px;
+    vertical-align:top;
+    background:#101010;
+}
+
+table tr:nth-child(even){
+    background:#161616;
+}
+
+.preview-title{
+    font-size:1.1rem;
+    color:#ff6600;
+    margin-bottom:15px;
+    display:block;
+}
+
+iframe{
+    width:100%;
+    height:300px;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+}
+
+footer{
+    margin-top:50px;
+    padding:40px 20px;
+    text-align:center;
+    background:#0d0d0d;
+    border-top:3px solid #ff6600;
+}
+
+footer h2{
+    color:#ff6600;
+    margin-bottom:20px;
+}
+
+.glow{
+    text-shadow:0 0 10px #ff6600;
+}
+
+@media(max-width:768px){
+
+    header h1{
+        font-size:2rem;
+    }
+
+    iframe{
+        height:220px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🔥💣 CICS MAINFRAME NA VISÃO DO ANALISTA DE PRODUÇÃO 💣🔥</h1>
+    <p>
+        O CICS não é apenas um monitor transacional.
+        Para um Analista de Produção Mainframe, ele é literalmente um organismo vivo.
+        Milhões de transações passam por ele diariamente.
+        Quando tudo funciona, ninguém percebe.
+        Quando algo trava… bancos, cartões, PIX, seguradoras e até governos podem parar.
+    </p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🚀 Rotinas Diárias do Analista de Produção CICS</h2>
+
+        <ul>
+            <li>Monitorar regiões CICS online e batch.</li>
+            <li>Verificar consumo de CPU, storage e tasks penduradas.</li>
+            <li>Analisar transações long-running.</li>
+            <li>Executar comandos <span class="highlight">CEMT</span> para investigar recursos.</li>
+            <li>Verificar deadlocks e gargalos em DB2.</li>
+            <li>Monitorar filas TDQ/TSQ.</li>
+            <li>Investigar dumps e abends.</li>
+            <li>Validar saúde das TORs e AORs.</li>
+            <li>Verificar conexões MQSeries e APIs.</li>
+            <li>Acompanhar SLAs e picos transacionais.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>⚡ Rotinas Semanais</h2>
+
+        <ul>
+            <li>Revisão de capacity planning.</li>
+            <li>Análise de tendências de crescimento.</li>
+            <li>Revisão de incidentes críticos.</li>
+            <li>Atualização de automações REXX/JCL.</li>
+            <li>Validação de backups e recovery.</li>
+            <li>Revisão de regras RACF ligadas ao CICS.</li>
+            <li>Health check de VSAM e logs.</li>
+            <li>Testes de failover e contingência.</li>
+            <li>Revisão de performance de aplicações COBOL.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>💥 Rotinas Mensais</h2>
+
+        <ul>
+            <li>Aplicação de maintenance e PTFs.</li>
+            <li>Planejamento de upgrades CICS TS.</li>
+            <li>Auditoria de segurança.</li>
+            <li>Revisão completa de tuning.</li>
+            <li>Análise de storage violations.</li>
+            <li>Revisão de métricas SMF/RMF.</li>
+            <li>Documentação operacional.</li>
+            <li>Testes DRP (Disaster Recovery Plan).</li>
+            <li>Planejamento estratégico de capacidade.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>🔥 O QUE UM ANALISTA DE PRODUÇÃO CICS REALMENTE FAZ?</h2>
+
+        <p>
+            Ele combate incêndios invisíveis.
+            Enquanto o usuário final apenas passa um cartão ou faz um PIX,
+            existe um ecossistema inteiro rodando por trás:
+        </p>
+
+        <br>
+
+        <ul>
+            <li>CICS TS</li>
+            <li>DB2</li>
+            <li>MQ</li>
+            <li>VSAM</li>
+            <li>JES2</li>
+            <li>z/OS</li>
+            <li>RACF</li>
+            <li>TCP/IP</li>
+            <li>Sysplex</li>
+        </ul>
+
+        <br>
+
+        <p>
+            O Analista de Produção é o profissional que garante que
+            tudo isso continue funcionando mesmo sob pressão absurda.
+        </p>
+    </div>
+
+    <div class="counter-box">
+        👁️ Visitas nesta máquina:
+        <span id="visitCounter">0</span>
+		
+    </div>
+
+
+
+<!-- CONTADOR DE VISITAS GRATUITO + ESTATÍSTICAS -->
+<!-- Adicione antes da tag </body> -->
+
+<div id="visitor-counter">
+    <h3>📊 Estatísticas do Portal VSAM</h3>
+
+    <div class="counter-box">
+
+        <!-- Total de visitas -->
+        <img
+            src="https://hitwebcounter.com/counter/counter.php?page=YOUR_UNIQUE_ID&style=0038&nbdigits=7&type=page&initCount=0"
+            title="Contador de Visitas"
+            alt="contador de visitas"
+            border="0"
+        />
+
+<!-- hitwebcounter Code START -->
+<a href="https://www.hitwebcounter.com/protect-pdf" target="_blank" rel="noopener" title="Get Secure PDF">
+<img src="https://www.hitwebcounter.com/counter/counter.php?page=21496115&amp;style=0005&amp;nbdigits=5&amp;type=page" alt="Get Secure PDF" decoding="async" style="border:0;max-width:100%;height:auto;" />
+</a>
+<br />
+<a href="https://www.hitwebcounter.com/" target="_blank" rel="noopener" style="font-family:Geneva, Arial, Helvetica, sans-serif;font-size:9px;color:#908C86;text-decoration:underline;font-weight:bold;">No. of Visits.</a>
+<!-- hitwebcounter Code END -->
+
+
+        <p>
+            🔥 Monitorando acessos em tempo real ao conteúdo VSAM Mainframe
+        </p>
+
+        <a href="https://www.hitwebcounter.com/" target="_blank">
+            Ver estatísticas
+        </a>
+
+    </div>
+</div>
+
+<style>
+
+#visitor-counter{
+    margin-top:60px;
+    padding:30px;
+    background:#111827;
+    border:1px solid #00d8ff;
+    border-radius:14px;
+    text-align:center;
+}
+
+#visitor-counter h3{
+    color:#00d8ff;
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.counter-box img{
+    margin:20px auto;
+    display:block;
+}
+
+.counter-box p{
+    margin-top:15px;
+    font-size:1rem;
+    color:#ddd;
+}
+
+.counter-box a{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 20px;
+    background:#00d8ff;
+    color:#000;
+    border-radius:8px;
+    font-weight:bold;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.counter-box a:hover{
+    transform:scale(1.05);
+}
+
+</style>
+
+<script data-goatcounter="https://iplvsam.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+
+
+    <div class="card">
+        <h2>📚 Labs, Guias e Simuladores Sobre CICS Mainframe</h2>
+
+<!-- RODAPÉ COM TABELA DE PREVIEWS EMBEDADAS -->
+
+<footer class="footer-links">
+
+<h2>🔥💣 LABS E GUIAS CICS MAINFRAME 💣🔥</h2>
+
+<table class="preview-table">
+
+<tr>
+
+<td>
+<b>
+⚡💣 LAB CICS — MEM CRÍTICO 🚨 “QUANDO A MEMÓRIA ACABA… O CICS PEDE SOCORRO” 🚨
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/05/lab-cics-mem-critico-quando-memoria.html"></iframe>
+</td>
+
+<td>
+<b>
+🚨💥 SIMULADOR CICS — “GUERRA EM PRODUÇÃO” 💥🚨
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/05/simulador-cics-guerra-em-producao.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+🚨💥 LAB CICS: “A TASK QUE PAROU A EMPRESA” — DO CAOS À RECUPERAÇÃO 💥🚨
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/05/simulador-cics-guerra-em-producao.html"></iframe>
+</td>
+
+<td>
+<b>
+🚀💥 CICS: O “CONTROLADOR DE TRÁFEGO” DO MAINFRAME
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/cics-o-controlador-de-trafego-do.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+🔥💣 CICS TOR + AOR NA VEIA
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/cics-tor-aor-na-veia-o-lab-que.html"></iframe>
+</td>
+
+<td>
+<b>
+💥 Operador de CICS Não Aperta Botão
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/operador-de-cics-nao-aperta-botao-ele.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💥 CICS Não é Legado
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/04/cics-nao-e-legado-como-o-cics-ts-63.html"></iframe>
+</td>
+
+<td>
+<b>
+🔥💀 COBOL SECURITY LAB — “SEU CICS SOB ATAQUE”
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/02/criar-versao-cobol-hands-on-cics-db2.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💀🔥 Seu CICS Está Conversando com o Hacker
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/seu-cics-esta-conversando-com-o-hacker.html"></iframe>
+</td>
+
+<td>
+<b>
+📘 REPOST: CICS Command Level para padawans
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/repost-cics-command-level-para-padawans.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💥 CEMT NÃO É COMANDO — É PODER
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/cemt-nao-e-comando-e-poder-o-guia.html"></iframe>
+</td>
+
+<td>
+<b>
+💥 SEU CICS NÃO QUEBROU — VOCÊ QUE NÃO ENTENDEU OS SINAIS
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/seu-cics-nao-quebrou-voce-que-nao.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💥 Seu CICS Não Sobe — Ele RENASCE
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/seu-cics-nao-sobe-ele-renasce-o-guia.html"></iframe>
+</td>
+
+<td>
+<b>
+💥 CEMT NÃO MORREU — MAS O CICS EXPLORER DOMINA
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/cemt-nao-morreu-mas-o-cics-explorer.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💥 CICS EXPLORER no IBM z17
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/cemt-nao-morreu-mas-o-cics-explorer_11.html"></iframe>
+</td>
+
+<td>
+<b>
+💥 SE VOCÊ AINDA VIVE DE CEMT, JÁ ESTÁ ATRASADO
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/se-voce-ainda-vive-de-cemt-ja-esta.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💥 SEU COBOL NÃO É LEGADO — É UM MOTOR TRANSACIONAL DE GUERRA
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/seu-cobol-nao-e-legado-e-um-motor.html"></iframe>
+</td>
+
+<td>
+<b>
+💥 O SISTEMA QUE NUNCA PODE PARAR
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/o-sistema-que-nunca-pode-parar-cics-ts.html"></iframe>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<b>
+💥 SEU COBOL NÃO RODA — ELE ORQUESTRA O MUNDO
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/seu-cobol-nao-roda-ele-orquestra-o.html"></iframe>
+</td>
+
+<td>
+<b>
+💥 SEU CICS NÃO ESCALA — ELE DOMINA ECOSSISTEMAS
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2025/12/seu-cics-nao-escala-ele-domina.html"></iframe>
+</td>
+
+</tr>
+
+</table>
+
+<p class="footer-text">
+🔥 Enquanto o mundo dorme… existe um Analista de Produção observando TASKS, STORAGE, CPU e filas no coração invisível do planeta digital. 🔥
+</p>
+
+</footer>
+
+<style>
+
+.footer-links{
+    background:#080808;
+    padding:50px 20px;
+    margin-top:60px;
+    border-top:4px solid #ff6600;
+}
+
+.footer-links h2{
+    text-align:center;
+    color:#ff6600;
+    margin-bottom:40px;
+    font-size:2rem;
+    text-shadow:0 0 10px #ff6600;
+}
+
+.preview-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.preview-table td{
+    width:50%;
+    padding:20px;
+    border:1px solid #333;
+    vertical-align:top;
+    background:#111;
+}
+
+.preview-table b{
+    display:block;
+    color:#ff6600;
+    margin-bottom:15px;
+    font-size:1rem;
+}
+
+.preview-table iframe{
+    width:100%;
+    height:320px;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+}
+
+.footer-text{
+    margin-top:40px;
+    text-align:center;
+    font-size:1.1rem;
+    color:#ccc;
+}
+
+@media(max-width:900px){
+
+    .preview-table tr{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .preview-table td{
+        width:100%;
+    }
+
+    .preview-table iframe{
+        height:240px;
+    }
+
+}
+
+</style>
+
+<footer>
+    <h2 class="glow">💣 Bellacosa Mainframe Labs 💣</h2>
+
+    <p>
+        “Enquanto o mundo dorme… existe um operador observando tasks,
+        dumps, storage e filas no coração invisível do planeta digital.”
+    </p>
+</footer>
+
+<script>
+
+// CONTADOR DE VISITAS LOCAL FUNCIONAL
+
+let visitas = localStorage.getItem('contadorVisitas');
+
+if(visitas === null){
+    visitas = 1;
+}else{
+    visitas = parseInt(visitas) + 1;
+}
+
+localStorage.setItem('contadorVisitas', visitas);
+
+document.getElementById('visitCounter').innerText = visitas;
+
+// efeito no título
+
+const tituloOriginal = document.title;
+
+window.addEventListener('blur', () => {
+    document.title = "🚨 O CICS CONTINUA RODANDO...";
+});
+
+window.addEventListener('focus', () => {
+    document.title = tituloOriginal;
+});
+
+</script>
+
+</body>
+</html>
