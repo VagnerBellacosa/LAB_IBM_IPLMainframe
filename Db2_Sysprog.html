@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🔥☕ DB2 Mainframe — A Vida Real de um Analista de Produção no z/OS ☕🔥</title>
+
+<meta name="description" content="Conheça as rotinas diárias, semanais e mensais de um Analista de Produção DB2 no Mainframe IBM Z. Monitoramento, troubleshooting, performance, utilities e sobrevivência em produção.">
+
+<meta name="keywords" content="DB2, DB2 zOS, Mainframe, IBM Z, Analista de Produção, DB2 Performance, SQLCODE, DB2 Utilities, REORG, RUNSTATS, COPY, EXPLAIN">
+
+<meta name="author" content="Bellacosa Mainframe">
+
+<meta property="og:title" content="🔥☕ DB2 Mainframe — A Vida Real de um Analista de Produção ☕🔥">
+<meta property="og:description" content="O cérebro invisível dos dados corporativos visto pela ótica de produção no IBM Z.">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050505;
+    color:#e5e5e5;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.7;
+}
+
+header{
+    background:linear-gradient(135deg,#101010,#1a1a1a,#222);
+    padding:60px 20px;
+    text-align:center;
+    border-bottom:4px solid #ff6600;
+}
+
+header h1{
+    color:#ff6600;
+    font-size:3rem;
+    margin-bottom:20px;
+    text-shadow:0 0 15px #ff6600;
+}
+
+header p{
+    max-width:1100px;
+    margin:auto;
+    font-size:1.2rem;
+}
+
+.container{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:40px 0;
+}
+
+.card{
+    background:#111;
+    padding:30px;
+    margin-bottom:35px;
+    border-left:5px solid #ff6600;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(255,102,0,0.2);
+}
+
+.card h2{
+    color:#ff6600;
+    margin-bottom:20px;
+    font-size:2rem;
+}
+
+.card ul{
+    margin-left:25px;
+}
+
+.card li{
+    margin-bottom:12px;
+}
+
+.highlight{
+    color:#00ff99;
+    font-weight:bold;
+}
+
+.counter-box{
+    background:#181818;
+    border:2px solid #ff6600;
+    padding:25px;
+    border-radius:10px;
+    text-align:center;
+    font-size:1.5rem;
+    margin-top:30px;
+}
+
+.footer-links{
+    background:#090909;
+    padding:50px 20px;
+    border-top:4px solid #ff6600;
+    margin-top:60px;
+}
+
+.footer-links h2{
+    text-align:center;
+    color:#ff6600;
+    margin-bottom:40px;
+    font-size:2rem;
+    text-shadow:0 0 10px #ff6600;
+}
+
+.preview-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.preview-table td{
+    width:50%;
+    padding:20px;
+    border:1px solid #333;
+    background:#111;
+    vertical-align:top;
+}
+
+.preview-table b{
+    display:block;
+    color:#ff6600;
+    margin-bottom:15px;
+    font-size:1rem;
+}
+
+.preview-table iframe{
+    width:100%;
+    height:320px;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+}
+
+.footer-text{
+    margin-top:40px;
+    text-align:center;
+    color:#ccc;
+    font-size:1.1rem;
+}
+
+.glow{
+    text-shadow:0 0 10px #ff6600;
+}
+
+@media(max-width:900px){
+
+    .preview-table tr{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .preview-table td{
+        width:100%;
+    }
+
+    .preview-table iframe{
+        height:240px;
+    }
+
+    header h1{
+        font-size:2rem;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🔥☕ DB2 MAINFRAME — A VIDA REAL EM PRODUÇÃO ☕🔥</h1>
+
+<p>
+Enquanto o usuário consulta saldo, faz PIX, compra ações ou emite um cartão,
+existe um cérebro invisível processando milhões de acessos simultâneos:
+o DB2 no Mainframe.
+E por trás dele… existe o Analista de Produção garantindo que tudo continue vivo.
+</p>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🚀 Rotinas Diárias do Analista de Produção DB2</h2>
+
+<ul>
+
+<li>Monitorar CPU e consumo das threads DB2.</li>
+
+<li>Analisar locks e deadlocks.</li>
+
+<li>Investigar SQLCODEs críticos.</li>
+
+<li>Monitorar buffer pools.</li>
+
+<li>Verificar jobs de utilities.</li>
+
+<li>Analisar crescimento de tablespaces.</li>
+
+<li>Identificar queries degradadas.</li>
+
+<li>Monitorar logs ativos e archive logs.</li>
+
+<li>Investigar access paths alterados.</li>
+
+<li>Executar troubleshooting em produção.</li>
+
+<li>Verificar performance batch e online.</li>
+
+<li>Monitorar consumo de RID pool e EDM pool.</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>⚡ Rotinas Semanais</h2>
+
+<ul>
+
+<li>Executar análise de REORG pendentes.</li>
+
+<li>Validar estatísticas RUNSTATS.</li>
+
+<li>Revisar jobs COPY e RECOVER.</li>
+
+<li>Verificar índices degradados.</li>
+
+<li>Planejar manutenção preventiva.</li>
+
+<li>Revisar SQLs de alto consumo.</li>
+
+<li>Analisar tendências de crescimento.</li>
+
+<li>Executar health checks DB2.</li>
+
+<li>Testar recovery em ambiente controlado.</li>
+
+<li>Revisar automações operacionais.</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>💥 Rotinas Mensais</h2>
+
+<ul>
+
+<li>Planejamento de capacity.</li>
+
+<li>Aplicação de PTFs e manutenção DB2.</li>
+
+<li>Auditoria de segurança RACF/DB2.</li>
+
+<li>Revisão de tuning de buffer pools.</li>
+
+<li>Revisão de catálogo DB2.</li>
+
+<li>Planejamento de expansão de storage.</li>
+
+<li>Testes DRP e recuperação.</li>
+
+<li>Documentação operacional.</li>
+
+<li>Revisão de SLAs críticos.</li>
+
+<li>Análise histórica de incidentes.</li>
+
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>🔥 O QUE O ANALISTA DE PRODUÇÃO DB2 REALMENTE FAZ?</h2>
+
+<p>
+
+Ele combate gargalos invisíveis.
+
+Enquanto aplicações COBOL, Java, APIs e microsserviços fazem consultas simultâneas,
+o DB2 precisa responder em milissegundos.
+
+Quando uma query explode CPU,
+um índice degrada,
+um lock trava centenas de transações,
+ou um access path muda…
+
+o caos começa.
+
+</p>
+
+<br>
+
+<p>
+
+É nesse momento que entra o Analista de Produção DB2:
+o profissional que literalmente impede que bancos,
+seguradoras,
+governos
+e sistemas financeiros parem.
+
+</p>
+
+</div>
+
+<div class="counter-box">
+
+👁️ VISITAS NESTE NAVEGADOR:
+<span id="visitCounter">0</span>
+
+</div>
+
+<div id="visitor-counter">
+    <h3>📊 Estatísticas do Portal DB2</h3>
+
+    <div class="counter-box">
+
+        <!-- Total de visitas -->
+        <img
+            src="https://hitwebcounter.com/counter/counter.php?page=YOUR_UNIQUE_ID&style=0038&nbdigits=7&type=page&initCount=0"
+            title="Contador de Visitas"
+            alt="contador de visitas"
+            border="0"
+        />
+<br>
+<!-- hitwebcounter Code START -->
+<a href="https://www.hitwebcounter.com/protect-pdf" target="_blank" rel="noopener" title="Get Secure PDF">
+<img src="https://www.hitwebcounter.com/counter/counter.php?page=21496115&amp;style=0005&amp;nbdigits=5&amp;type=page" alt="Get Secure PDF" decoding="async" style="border:0;max-width:100%;height:auto;" />
+</a>
+<br />
+
+<a href="https://www.hitwebcounter.com/" target="_blank" rel="noopener" style="font-family:Geneva, Arial, Helvetica, sans-serif;font-size:9px;color:#908C86;text-decoration:underline;font-weight:bold;">No. of Visits.</a>
+<!-- hitwebcounter Code END -->
+
+
+        <p>
+            🔥 Monitorando acessos em tempo real ao conteúdo DB2 Mainframe
+        </p>
+
+        <a href="https://www.hitwebcounter.com/" target="_blank">
+            Ver estatísticas
+        </a>
+
+    </div>
+</div>
+
+</div>
+
+<!-- RODAPÉ -->
+
+<footer class="footer-links">
+
+<h2 class="glow">💣 LABS E GUIAS DB2 MAINFRAME 💣</h2>
+
+<table class="preview-table">
+
+<tr>
+
+<td>
+
+<b>
+🔥☕ DB2 z/OS MAINFRAME — A ANATOMIA DO “CÉREBRO DOS DADOS” ☕🔥
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2020/03/db2-zos-mainframe-anatomia-do-cerebro.html"></iframe>
+
+</td>
+
+<td>
+
+<b>
+🔥☕ LABORATÓRIO DB2 z/OS — 20 PROBLEMAS REAIS DE PRODUÇÃO COM SOLUÇÕES ☕🔥
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2020/07/laboratorio-db2-utilities-zos-20.html"></iframe>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>
+🔥☕ LABORATÓRIO DB2 UTILITIES z/OS — 20 INCIDENTES REAIS DE PRODUÇÃO ☕🔥
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2020/09/laboratorio-db2-zos-20-problemas-reais.html"></iframe>
+
+</td>
+
+<td>
+
+<b>
+💥 DB2 - CENÁRIO: CPU EXPLODINDO EM PRODUÇÃO
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/db2-cenario-cpu-explodindo-em-producao.html"></iframe>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>
+💥 DB2 LAB: EXPLAIN + ACCESS PATH (na prática)
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/db2-lab-explain-access-path-na-pratica.html"></iframe>
+
+</td>
+
+<td>
+
+<b>
+💥 DB2 A REGRA QUE MUDA TUDO
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/lab-db2-na-pratica-do-tso-ao-batch.html"></iframe>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<b>
+💣 DB2 Troubleshotting
+</b>
+
+<iframe src="https://eljefemidnightlunch.blogspot.com/2026/01/db2-troubleshotting.html"></iframe>
+
+</td>
+
+<td>
+
+<b>
+🔥☕ O ANALISTA QUE ENXERGA O INVISÍVEL NO DB2 ☕🔥
+</b>
+
+<div style="padding:30px; color:#ccc; font-size:1rem;">
+
+Enquanto milhões fazem consultas SQL…
+existe alguém monitorando locks, CPU, logs e buffer pools no silêncio do z/OS.
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+<p class="footer-text">
+
+🔥 “No Mainframe, o DB2 não guarda apenas dados… ele guarda o funcionamento do mundo.” 🔥
+
+</p>
+
+</footer>
+
+<script>
+
+// CONTADOR DE VISITAS FUNCIONAL
+
+let visitas = localStorage.getItem('contadorDB2');
+
+if(visitas === null){
+    visitas = 1;
+}else{
+    visitas = parseInt(visitas) + 1;
+}
+
+localStorage.setItem('contadorDB2', visitas);
+
+document.getElementById('visitCounter').innerText = visitas;
+
+// efeito dinâmico no título
+
+const tituloOriginal = document.title;
+
+window.addEventListener('blur', () => {
+    document.title = "🚨 O DB2 CONTINUA PROCESSANDO...";
+});
+
+window.addEventListener('focus', () => {
+    document.title = tituloOriginal;
+});
+
+</script>
+
+</body>
+</html>
