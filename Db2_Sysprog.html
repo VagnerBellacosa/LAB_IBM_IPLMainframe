@@ -172,6 +172,95 @@ header p{
 
 }
 
+body{
+    background:#050505;
+    font-family:Arial, Helvetica, sans-serif;
+    margin:0;
+    padding:40px 20px;
+    color:#f1f1f1;
+}
+
+.db2-gallery{
+    max-width:1200px;
+    margin:auto;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:40px;
+}
+
+.db2-card{
+    background:#0d0d0d;
+
+    border:1px solid #1f1f1f;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,0.08),
+        0 0 40px rgba(0,0,0,0.5);
+
+    transition:0.3s ease;
+}
+
+.db2-card:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 30px rgba(0,255,255,0.15),
+        0 0 60px rgba(0,0,0,0.7);
+}
+
+.db2-image{
+    width:100%;
+    display:block;
+
+    border-bottom:1px solid #222;
+}
+
+.db2-info{
+    padding:25px;
+}
+
+.db2-info h2{
+    margin:0 0 12px;
+
+    color:#00ffe7;
+
+    font-size:32px;
+
+    letter-spacing:1px;
+}
+
+.db2-info p{
+    margin:0;
+
+    color:#cfcfcf;
+
+    font-size:18px;
+
+    line-height:1.7;
+}
+
+@media(max-width:768px){
+
+    body{
+        padding:20px 10px;
+    }
+
+    .db2-info h2{
+        font-size:24px;
+    }
+
+    .db2-info p{
+        font-size:16px;
+    }
+}
+
+
 </style>
 
 </head>
@@ -363,6 +452,48 @@ e sistemas financeiros parem.
 </div>
 
 </div>
+
+    <section class="db2-gallery">
+        
+        <div class="db2-card">
+            <img 
+                src="Page/img/db2-commands.png" 
+                alt="Tela DB2 Commands Mainframe z/OS"
+                class="db2-image"
+            >
+            
+            <div class="db2-info">
+                <h2>DB2 Commands</h2>
+                <p>
+                    Painel operacional do DB2 z/OS utilizado para monitoramento,
+                    troubleshooting, análise de bufferpools, databases, threads,
+                    logs e objetos do subsistema DB2.
+                </p>
+            </div>
+        </div>
+
+        <div class="db2-card">
+            <img 
+                src="Page/img/db2-utilities.png" 
+                alt="Tela DB2 Utilities Mainframe z/OS"
+                class="db2-image"
+            >
+            
+            <div class="db2-info">
+                <h2>DB2 Utilities</h2>
+                <p>
+                    Área responsável pelas utilities do DB2 como REORG,
+                    COPY, RECOVER, RUNSTATS, REBUILD INDEX e operações
+                    críticas de manutenção em ambiente mainframe IBM z15.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+
+
+<br>
 
 <!-- RODAPÉ -->
 
