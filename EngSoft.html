@@ -1,0 +1,436 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Laboratório Mainframe IBM Z | Engenharia de Software para COBOL Junior</title>
+
+<meta name="description" content="Laboratório prático interativo de Engenharia de Software para Programador COBOL Junior no mundo IBM Mainframe z/OS com duração estimada de 30 minutos."/>
+
+<meta name="keywords" content="mainframe, ibm z, cobol, engenharia de software, z/os, cics, db2, jcl, sysprog, laboratório cobol, curso mainframe"/>
+
+<meta name="author" content="Bellacosa Mainframe"/>
+
+<meta property="og:title" content="Laboratório Mainframe IBM Z"/>
+<meta property="og:description" content="Sessão prática interativa de Engenharia de Software para COBOL Junior."/>
+<meta property="og:type" content="website"/>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#0b0f19;
+    color:#f5f5f5;
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.6;
+}
+
+header{
+    background:linear-gradient(135deg,#ff6b00,#ff0000);
+    padding:40px 20px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(255,0,0,0.5);
+}
+
+header h1{
+    font-size:2.5rem;
+    margin-bottom:15px;
+}
+
+header p{
+    font-size:1.1rem;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:#131c2f;
+    margin:20px 0;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid #24324f;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+.card h2{
+    color:#ff7b00;
+    margin-bottom:15px;
+}
+
+.code{
+    background:#000;
+    color:#00ff88;
+    padding:15px;
+    border-radius:10px;
+    overflow-x:auto;
+    margin-top:15px;
+    font-family:Consolas, monospace;
+}
+
+button{
+    background:#ff6b00;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    margin-top:15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff3300;
+    transform:scale(1.05);
+}
+
+.progress{
+    width:100%;
+    background:#1e2a42;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:15px;
+}
+
+.progress-bar{
+    height:25px;
+    width:0%;
+    background:linear-gradient(90deg,#00ff88,#00c3ff);
+    text-align:center;
+    line-height:25px;
+    color:#000;
+    font-weight:bold;
+    transition:1s;
+}
+
+.timer{
+    font-size:2rem;
+    text-align:center;
+    margin-top:20px;
+    color:#00ff88;
+}
+
+.counter{
+    font-size:1.2rem;
+    margin-top:15px;
+    color:#ffd700;
+}
+
+.quiz{
+    margin-top:15px;
+}
+
+.quiz button{
+    display:block;
+    width:100%;
+    margin:10px 0;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    margin-top:40px;
+    background:#111;
+    color:#888;
+}
+
+.highlight{
+    color:#00ff88;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+
+header h1{
+    font-size:2rem;
+}
+
+.timer{
+    font-size:1.5rem;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🔥☕ Laboratório Mainframe IBM Z</h1>
+    <p>
+        Engenharia de Software para Programador COBOL Junior • Duração Estimada: 30 Minutos
+    </p>
+
+    <div class="counter">
+        👀 Visitantes do Laboratório:
+        <span id="visitCounter">0</span>
+    </div>
+</header>
+
+<div class="container">
+
+<div class="card">
+    <h2>🏛️ Missão do Laboratório</h2>
+
+    <p>
+        Você é um programador COBOL Junior trabalhando em um ambiente IBM z/OS.
+        Seu sistema batch começou a apresentar falhas durante o fechamento bancário.
+    </p>
+
+    <p>
+        Sua missão é aplicar conceitos de Engenharia de Software Enterprise
+        para corrigir problemas de:
+    </p>
+
+    <ul>
+        <li>✔️ Legibilidade</li>
+        <li>✔️ Performance</li>
+        <li>✔️ Tratamento de erro</li>
+        <li>✔️ Observabilidade</li>
+        <li>✔️ Modularização</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>⏱️ Timer Oficial do Laboratório</h2>
+
+    <div class="timer" id="timer">
+        30:00
+    </div>
+
+    <button onclick="startTimer()">
+        ▶️ Iniciar Laboratório
+    </button>
+</div>
+
+<div class="card">
+    <h2>💾 Código COBOL Herdado</h2>
+
+    <p>
+        Analise o código abaixo e identifique possíveis problemas operacionais.
+    </p>
+
+<div class="code">
+IDENTIFICATION DIVISION.<br>
+PROGRAM-ID. FIN001.<br><br>
+
+WORKING-STORAGE SECTION.<br>
+01 WS-TOTAL PIC 9(09)V99 VALUE 0.<br>
+01 WS-EOF PIC X VALUE 'N'.<br><br>
+
+PROCEDURE DIVISION.<br><br>
+
+OPEN INPUT ARQ-TRANS.<br><br>
+
+PERFORM UNTIL WS-EOF = 'S'<br><br>
+
+READ ARQ-TRANS<br>
+AT END<br>
+MOVE 'S' TO WS-EOF<br>
+END-READ<br><br>
+
+ADD VALOR TO WS-TOTAL<br><br>
+
+END-PERFORM.
+</div>
+
+<button onclick="showAnalysis()">
+🔍 Analisar Código
+</button>
+
+<div id="analysis" style="display:none; margin-top:20px;">
+    <p class="highlight">
+        ⚠️ Problema Detectado:
+    </p>
+
+    <p>
+        O programa continua processando após EOF.
+        Isso pode gerar:
+    </p>
+
+    <ul>
+        <li>💥 S0C7</li>
+        <li>💥 Soma inválida</li>
+        <li>💥 Dados corrompidos</li>
+    </ul>
+</div>
+</div>
+
+<div class="card">
+    <h2>🚨 Simulação de Incidente Enterprise</h2>
+
+    <p>
+        O operador reportou:
+    </p>
+
+<div class="code">
+JOB FINCLOSE ABEND S013
+</div>
+
+<div class="quiz">
+    <p>
+        Qual o primeiro ponto que um engenheiro mainframe deve investigar?
+    </p>
+
+    <button onclick="wrongAnswer()">
+        SQLCODE DB2
+    </button>
+
+    <button onclick="correctAnswer()">
+        JCL / DDNAME / DCB
+    </button>
+
+    <button onclick="wrongAnswer()">
+        Buffer Pool DB2
+    </button>
+
+    <button onclick="wrongAnswer()">
+        RACF Password
+    </button>
+</div>
+
+<div id="quizResult" style="margin-top:20px;"></div>
+</div>
+
+<div class="card">
+    <h2>📊 Progresso do Laboratório</h2>
+
+    <div class="progress">
+        <div class="progress-bar" id="progressBar">
+            0%
+        </div>
+    </div>
+
+    <button onclick="advanceProgress()">
+        🚀 Avançar Etapa
+    </button>
+</div>
+
+<div class="card">
+    <h2>☕ Filosofia Bellacosa Mainframe</h2>
+
+    <p>
+        “No mundo IBM Z, código não precisa apenas funcionar.
+        Ele precisa sobreviver:
+    </p>
+
+    <ul>
+        <li>🏛️ auditoria</li>
+        <li>🏛️ milhões de transações</li>
+        <li>🏛️ batch noturno</li>
+        <li>🏛️ incidentes</li>
+        <li>🏛️ manutenção futura</li>
+    </ul>
+
+    <p class="highlight">
+        Engenharia de Software é sobrevivência operacional.
+    </p>
+</div>
+
+</div>
+
+<footer>
+    🔥 IBM Z • COBOL • CICS • DB2 • Engenharia de Software Enterprise 🚀
+</footer>
+
+<script>
+
+let progress = 0;
+
+function advanceProgress(){
+
+    if(progress < 100){
+        progress += 20;
+
+        document.getElementById("progressBar").style.width = progress + "%";
+        document.getElementById("progressBar").innerHTML = progress + "%";
+    }
+}
+
+function showAnalysis(){
+    document.getElementById("analysis").style.display = "block";
+}
+
+function correctAnswer(){
+
+    document.getElementById("quizResult").innerHTML = `
+    <p style="color:#00ff88;">
+    ✅ Correto! ABEND S013 normalmente envolve:
+    DCB, RECFM, LRECL ou problemas de dataset/JCL.
+    </p>`;
+}
+
+function wrongAnswer(){
+
+    document.getElementById("quizResult").innerHTML = `
+    <p style="color:#ff4444;">
+    ❌ Não é o foco inicial.
+    Primeiro investigue DDNAME, DCB e dataset.
+    </p>`;
+}
+
+let timerStarted = false;
+
+function startTimer(){
+
+    if(timerStarted) return;
+
+    timerStarted = true;
+
+    let duration = 30 * 60;
+
+    let timer = duration;
+
+    let interval = setInterval(function(){
+
+        let minutes = Math.floor(timer / 60);
+        let seconds = timer % 60;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        document.getElementById("timer").innerHTML =
+            minutes + ":" + seconds;
+
+        timer--;
+
+        if(timer < 0){
+            clearInterval(interval);
+
+            document.getElementById("timer").innerHTML =
+                "🏁 LABORATÓRIO FINALIZADO";
+        }
+
+    },1000);
+}
+
+function updateVisits(){
+
+    let visits = localStorage.getItem("mainframeLabVisits");
+
+    if(visits === null){
+        visits = 1;
+    }else{
+        visits = parseInt(visits) + 1;
+    }
+
+    localStorage.setItem("mainframeLabVisits", visits);
+
+    document.getElementById("visitCounter").innerHTML = visits;
+}
+
+updateVisits();
+
+</script>
+
+</body>
+</html>
