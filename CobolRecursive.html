@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Simulador COBOL Recursivo | Tela IBM 3270 TSO ISPF | Bellacosa Mainframe</title>
+
+<meta name="description" content="Aprenda COBOL Recursivo de forma visual utilizando um simulador inspirado na tela 3270 do IBM Mainframe. Entenda CALL STACK, RECURSIVE, LOCAL-STORAGE e funcionamento interno do Enterprise COBOL.">
+
+<meta name="keywords" content="COBOL Recursivo, Enterprise COBOL, IBM Mainframe, zOS, TSO, ISPF, CALL STACK, LOCAL-STORAGE, Working Storage, COBOL Tutorial, Bellacosa Mainframe">
+
+<meta name="author" content="Bellacosa Mainframe">
+
+<style>
+
+body{
+background:#111;
+color:#00FF66;
+font-family:Consolas,Courier New,monospace;
+margin:0;
+padding:30px;
+}
+
+h1,h2{
+color:#00ff66;
+text-align:center;
+}
+
+a{
+color:#8fff8f;
+}
+
+.wrapper{
+max-width:1300px;
+margin:auto;
+}
+
+.terminal{
+
+background:#001A00;
+border:5px solid #999;
+box-shadow:0 0 25px #00ff66;
+padding:15px;
+border-radius:8px;
+}
+
+.header3270{
+
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+font-weight:bold;
+}
+
+.screen{
+
+background:#062306;
+padding:15px;
+min-height:420px;
+border:2px solid #00ff66;
+white-space:pre-wrap;
+overflow:auto;
+font-size:18px;
+}
+
+.menu{
+
+margin:20px 0;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+button{
+
+background:#005500;
+color:white;
+padding:10px 20px;
+font-size:18px;
+border:none;
+cursor:pointer;
+}
+
+button:hover{
+
+background:#00aa00;
+}
+
+input{
+
+background:black;
+color:#00ff66;
+border:1px solid #00ff66;
+font-size:18px;
+padding:8px;
+width:120px;
+}
+
+.stack{
+
+margin-top:20px;
+background:#000;
+padding:15px;
+border:2px solid #00ff66;
+min-height:180px;
+
+}
+
+.frame{
+
+padding:5px;
+margin:5px;
+border-bottom:1px dashed #0f0;
+
+}
+
+section{
+
+margin-top:60px;
+line-height:1.8;
+font-size:18px;
+
+}
+
+code{
+
+color:#ffff00;
+
+}
+
+footer{
+
+margin-top:60px;
+text-align:center;
+color:#888;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<h1>IBM Mainframe - Simulador COBOL Recursivo</h1>
+
+<div class="terminal">
+
+<div class="header3270">
+
+<div>ISPF PRIMARY OPTION MENU</div>
+
+<div>IBM z/OS 3.1</div>
+
+</div>
+
+<div class="screen" id="screen">
+
+== COBOL RECURSIVE SIMULATOR ==
+
+Digite um número e pressione EXECUTE.
+
+O simulador mostrará:
+
+- CALL
+- Entrada da rotina
+- Empilhamento
+- Retorno
+- Desempilhamento
+
+Inspirado na experiência TSO / ISPF.
+
+</div>
+
+<div class="menu">
+
+Número:
+<input id="valor" type="number" value="5">
+
+<button onclick="executar()">
+EXECUTE
+</button>
+
+<button onclick="limpar()">
+CLEAR
+</button>
+
+</div>
+
+<div class="stack">
+
+<h3>CALL STACK</h3>
+
+<div id="stackArea">
+
+Aguardando execução...
+
+</div>
+
+</div>
+
+</div>
+
+<section>
+
+<h2>O que é COBOL Recursivo?</h2>
+
+<p>
+
+Durante muitos anos, a maioria dos programadores COBOL acreditava que recursividade era algo exclusivo de linguagens como C, Pascal, Java ou Python. Entretanto, o Enterprise COBOL oferece suporte à palavra-chave <code>RECURSIVE</code>, permitindo que um programa invoque a si próprio diversas vezes.
+
+</p>
+
+<p>
+
+Cada chamada cria uma nova área de memória contendo suas próprias variáveis locais. Isso é possível graças à utilização da <strong>LOCAL-STORAGE SECTION</strong>. Diferentemente da WORKING-STORAGE, onde existe apenas uma instância das variáveis durante toda a execução do programa, a LOCAL-STORAGE cria uma nova cópia para cada chamada recursiva.
+
+</p>
+
+<p>
+
+Na prática, cada chamada é colocada sobre uma pilha de execução (Call Stack). Quando a condição de parada é encontrada, o programa começa a retornar, removendo uma chamada por vez até voltar ao ponto inicial.
+
+</p>
+
+<p>
+
+Embora algoritmos recursivos não sejam comuns em sistemas bancários escritos em COBOL, eles aparecem em analisadores de estruturas hierárquicas, processamento XML, JSON, árvores de diretórios, parsers, regras de negócio complexas, motores de IA e aplicações modernas integradas ao IBM Z.
+
+</p>
+
+<h2>Exemplo Enterprise COBOL</h2>
+
+<pre>
+
+IDENTIFICATION DIVISION.
+PROGRAM-ID. FATORIAL.
+
+DATA DIVISION.
+
+LOCAL-STORAGE SECTION.
+
+01 N PIC 9(4).
+
+PROCEDURE DIVISION USING N.
+
+IF N <= 1
+    GOBACK
+END-IF
+
+SUBTRACT 1 FROM N
+
+CALL "FATORIAL" USING N
+
+GOBACK.
+
+</pre>
+
+<h2>Boas práticas</h2>
+
+<ul>
+
+<li>Utilize LOCAL-STORAGE para evitar compartilhamento de variáveis.</li>
+
+<li>Defina claramente a condição de parada.</li>
+
+<li>Evite profundidades excessivas de chamadas.</li>
+
+<li>Analise consumo de CPU e Stack.</li>
+
+<li>Prefira algoritmos iterativos quando houver ganho significativo de desempenho.</li>
+
+<li>Documente a lógica recursiva.</li>
+
+</ul>
+
+<h2>Curiosidade</h2>
+
+<p>
+
+Internamente, o Enterprise COBOL utiliza mecanismos do LE (Language Environment), criando um novo contexto de execução para cada chamada recursiva. Esse comportamento é semelhante ao observado em linguagens modernas executadas sobre máquinas virtuais ou runtimes nativos.
+
+</p>
+
+<h2>Conclusão</h2>
+
+<p>
+
+A recursividade demonstra como o COBOL evoluiu muito além da imagem de uma linguagem exclusivamente procedural. Conhecer esse recurso amplia a capacidade do desenvolvedor de construir soluções modernas sobre IBM Z, aproximando o universo do Mainframe das técnicas empregadas em linguagens contemporâneas.
+
+</p>
+
+</section>
+
+<br><br>
+
+<div class="container">
+
+
+
+<div class="terminal">
+
+
+
+<div class="header">
+
+IBM TSO / ISPF Knowledge Center
+
+</div>
+
+
+<div class="subheader">
+
+
+OPTION ===> COBOL RECURSIVO
+
+<br><br>
+
+Coleção oficial de artigos do Bellacosa Mainframe sobre Programação Recursiva, Programas Aninhados e Subprogramas COBOL.
+
+
+</div>
+
+<tr>
+
+<td>
+
+<h3>Programas COBOL Aninhados: Os Holocrons Secretos Escondidos Dentro de um Único Load Module</h3>
+
+<p>
+Explora como programas COBOL aninhados compartilham contexto, organização interna do load module e boas práticas no Enterprise COBOL.
+</p>
+
+<a class="botao"
+   target="_blank"
+   href="https://eljefemidnightlunch.blogspot.com/2024/02/programas-cobol-aninhados-os-holocrons.html">
+Abrir em Nova Página
+</a>
+
+</td>
+
+<td>
+
+<iframe
+    src="https://eljefemidnightlunch.blogspot.com/2024/02/programas-cobol-aninhados-os-holocrons.html"
+    loading="lazy"
+    width="100%"
+    height="600"
+    frameborder="0">
+</iframe>
+
+</td>
+
+</tr>
+
+
+<footer>
+
+Bellacosa Mainframe • IBM Z • Enterprise COBOL • TSO • ISPF • z/OS
+
+</footer>
+
+</div>
+
+<script>
+
+const screen=document.getElementById("screen");
+const stack=document.getElementById("stackArea");
+
+let frames=[];
+
+function atualizarStack(){
+
+stack.innerHTML="";
+
+for(let i=frames.length-1;i>=0;i--){
+
+stack.innerHTML+=`
+<div class='frame'>
+FRAME ${i+1} → N=${frames[i]}
+</div>
+`;
+
+}
+
+}
+
+function escrever(txt){
+
+screen.innerHTML+=txt+"\n";
+
+screen.scrollTop=screen.scrollHeight;
+
+}
+
+function limpar(){
+
+screen.innerHTML=
+`== COBOL RECURSIVE SIMULATOR ==
+
+Digite um número e pressione EXECUTE.
+
+`;
+
+frames=[];
+
+atualizarStack();
+
+}
+
+async function pausa(){
+
+return new Promise(r=>setTimeout(r,600));
+
+}
+
+async function rec(n){
+
+frames.push(n);
+
+atualizarStack();
+
+escrever("CALL FATORIAL ("+n+")");
+
+await pausa();
+
+if(n<=1){
+
+escrever(">>> Condição de parada encontrada.");
+
+await pausa();
+
+frames.pop();
+
+atualizarStack();
+
+escrever("RETURN "+n);
+
+return 1;
+
+}
+
+let r=await rec(n-1);
+
+await pausa();
+
+let total=n*r;
+
+escrever("RETORNANDO "+n+" x "+r+" = "+total);
+
+frames.pop();
+
+atualizarStack();
+
+await pausa();
+
+return total;
+
+}
+
+async function executar(){
+
+limpar();
+
+let n=parseInt(document.getElementById("valor").value);
+
+escrever("Iniciando execução...\n");
+
+let resultado=await rec(n);
+
+escrever("\n=======================");
+
+escrever("RESULTADO FINAL = "+resultado);
+
+escrever("=======================");
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>IBM TSO/ISPF Knowledge Center - COBOL Recursivo</title>
+
+<style>
+
+body{
+    background:#111;
+    color:#00FF66;
+    font-family:Consolas,"Courier New",monospace;
+    margin:20px;
+}
+
+.container{
+    max-width:1600px;
+    margin:auto;
+}
+
+.terminal{
+    border:3px solid #888;
+    background:#001800;
+    box-shadow:0 0 20px #00ff66;
+    padding:15px;
+}
+
+.header{
+    font-size:28px;
+    text-align:center;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.info{
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+.layout{
+
+display:grid;
+grid-template-columns:420px 1fr;
+gap:20px;
+
+}
+
+.menu{
+
+border:2px solid #00FF66;
+padding:15px;
+background:#002400;
+
+}
+
+.item{
+
+padding:10px;
+margin-bottom:8px;
+cursor:pointer;
+border:1px solid #006600;
+
+}
+
+.item:hover{
+
+background:#005500;
+
+}
+
+.item strong{
+
+display:block;
+
+}
+
+.viewer{
+
+border:2px solid #00FF66;
+background:black;
+padding:10px;
+
+}
+
+iframe{
+
+width:100%;
+height:650px;
+border:none;
+background:white;
+
+}
+
+button{
+
+margin-top:15px;
+background:#005500;
+color:white;
+padding:10px 25px;
+cursor:pointer;
+border:none;
+font-size:16px;
+
+}
+
+button:hover{
+
+background:#00AA00;
+
+}
+
+.status{
+
+margin-top:15px;
+font-size:14px;
+color:#99ff99;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="terminal">
+
+<div class="header">
+
+IBM TSO / ISPF KNOWLEDGE CENTER
+
+</div>
+
+<div class="info">
+
+OPTION ===> COBOL RECURSIVO
+
+<br><br>
+
+Selecione um artigo na coluna esquerda.
+
+</div>
+
+<div class="layout">
+
+<div class="menu">
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2024/02/programas-cobol-aninhados-os-holocrons.html','Programas COBOL Aninhados')">
+<strong>1.</strong>
+Programas COBOL Aninhados
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2024/01/cobol-recursivo-quando-o-padawan.html','COBOL Recursivo - Padawan')">
+<strong>2.</strong>
+COBOL Recursivo - Padawan
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2023/05/guia-completo-de-cobol-recursivo-no-ibm.html','Guia Completo')">
+<strong>3.</strong>
+Guia Completo de COBOL Recursivo
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2023/04/cobol-recursivo-muito-alem-do-fatorial.html','Parte II C')">
+<strong>4.</strong>
+Muito Além do Fatorial - Parte II C
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2023/03/cobol-recursivo-muito-alem-do-fatorial.html','Parte II B')">
+<strong>5.</strong>
+Muito Além do Fatorial - Parte II B
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2023/02/cobol-recursivo-muito-alem-do-fatorial.html','Parte II A')">
+<strong>6.</strong>
+Muito Além do Fatorial - Parte II A
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2023/01/cobol-recursivo-muito-alem-do-fatorial.html','Parte I')">
+<strong>7.</strong>
+Muito Além do Fatorial - Parte I
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/2007/02/chamando-subprogramas-em-cobol-tipos-de.html','CALL')">
+<strong>8.</strong>
+Chamando Subprogramas em COBOL
+</div>
+
+<!-- exemplos extras -->
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/','Bellacosa Mainframe')">
+<strong>9.</strong>
+Página Inicial do Blog
+</div>
+
+<div class="item" onclick="abrir('https://eljefemidnightlunch.blogspot.com/search/label/COBOL','Label COBOL')">
+<strong>10.</strong>
+Artigos da Categoria COBOL
+</div>
+
+</div>
+
+<div class="viewer">
+
+<h2 id="titulo">
+
+Programas COBOL Aninhados
+
+</h2>
+
+<iframe
+id="viewer"
+loading="lazy"
+src="https://eljefemidnightlunch.blogspot.com/2024/02/programas-cobol-aninhados-os-holocrons.html">
+</iframe>
+
+<br>
+
+<a id="abrir"
+href="https://eljefemidnightlunch.blogspot.com/2024/02/programas-cobol-aninhados-os-holocrons.html"
+target="_blank">
+
+<button>
+
+Abrir em Nova Página
+
+</button>
+
+</a>
+
+<div class="status">
+
+PF1 Help &nbsp;&nbsp;
+PF3 End &nbsp;&nbsp;
+ENTER Select &nbsp;&nbsp;
+IBM Enterprise COBOL Knowledge Center
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function abrir(url,titulo){
+
+document.getElementById("viewer").src=url;
+
+document.getElementById("abrir").href=url;
+
+document.getElementById("titulo").innerHTML=titulo;
+
+}
+
+</script>
+
+</body>
+</html>
